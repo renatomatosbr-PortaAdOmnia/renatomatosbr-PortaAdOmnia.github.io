@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estúdio Corvo · Tatuagem autoral em Campinas (site de exemplo)</title>
+<meta name="description" content="Site de exemplo da Porta Ad Omnia para estúdios de tatuagem: orçamento na hora, flash day, galeria por artista, cuidados e agendamento direto no WhatsApp.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Estúdio Corvo · Tatuagem autoral (site de exemplo)">
+<meta property="og:description" content="Orçamento na hora, flash day, galeria por artista e agendamento no WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?w=1200&h=630&fit=crop&q=70&fm=jpg">
+<meta name="theme-color" content="#0f0e0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f0e0d'/%3E%3Cpath d='M32 10 L37 30 L54 32 L37 34 L32 54 L27 34 L10 32 L27 30 Z' fill='%23d4322c'/%3E%3C/svg%3E">
+<style>
+/* =========================================================
+   MODELO TATUAGEM — Porta Ad Omnia
+   Cores e fontes: troque só as variáveis abaixo para cada estúdio.
+   ========================================================= */
+:root{
+  --fundo:#0f0e0d;      /* carvão */
+  --fundo-2:#1a1816;
+  --osso:#ece6da;       /* texto e papel */
+  --osso-2:#b9b2a5;
+  --destaque:#d4322c;   /* vermelho tinta */
+  --linha:rgba(236,230,218,.16);
+  --titulo:"Pirata One", "UnifrakturCook", Georgia, serif;
+  --corpo:"Space Grotesk", system-ui, sans-serif;
+  --mono:"Space Mono", ui-monospace, monospace;
+  --raio:6px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--fundo);color:var(--osso);font-family:var(--corpo);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:inherit}
+button{font:inherit;color:inherit}
+::selection{background:var(--destaque);color:var(--osso)}
+:focus-visible{outline:2px solid var(--destaque);outline-offset:3px}
+.oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* textura de tinta: vinheta + ruído */
+.ruido{pointer-events:none;position:fixed;inset:0;z-index:90;opacity:.09;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cursor{position:fixed;left:0;top:0;width:14px;height:14px;border:1.5px solid var(--destaque);border-radius:50%;pointer-events:none;z-index:95;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
+.cursor.grande{width:64px;height:64px;background:rgba(212,50,44,.15)}
+@media (hover:none){.cursor{display:none}}
+
+.wrap{padding-inline:clamp(18px,4.5vw,56px)}
+.secao{padding-block:clamp(80px,11vw,150px);position:relative}
+.etiqueta{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--destaque);display:flex;gap:12px;align-items:center;margin-bottom:22px}
+.etiqueta::before{content:"";width:28px;height:1px;background:currentColor}
+.h2{font-family:var(--titulo);font-weight:400;font-size:clamp(52px,8vw,118px);line-height:.92;margin:0 0 18px;letter-spacing:.005em}
+.h2 em{font-style:normal;color:var(--destaque)}
+.lead{max-width:56ch;color:var(--osso-2);margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--osso);border-radius:999px;padding:13px 22px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;background:transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.btn:hover{background:var(--osso);color:var(--fundo)}
+.btn--cheio{background:var(--destaque);border-color:var(--destaque);color:var(--osso)}
+.btn--cheio:hover{background:var(--osso);border-color:var(--osso);color:var(--fundo)}
+.btn svg{width:18px;height:18px}
+
+/* ---------- loader: agulha desenha a estrela ---------- */
+.loader{position:fixed;inset:0;z-index:100;background:var(--fundo);display:grid;place-items:center}
+.loader svg{width:min(42vw,220px);overflow:visible}
+.loader path{fill:none;stroke:var(--destaque);stroke-width:2.2;stroke-linejoin:round}
+.loader__nome{position:absolute;bottom:32px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--osso-2)}
+.sem-js .loader{display:none}
+
+/* ---------- topo ---------- */
+.topo{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(18px,4.5vw,56px);transition:background .3s,padding .3s}
+.topo.rolou{background:rgba(15,14,13,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);padding-block:10px;border-bottom:1px solid var(--linha)}
+.marca{font-family:var(--titulo);font-size:30px;text-decoration:none;line-height:1}
+.marca b{color:var(--destaque);font-weight:400}
+.topo nav{display:flex;gap:22px;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.topo nav a{text-decoration:none;color:var(--osso-2)}
+.topo nav a:hover{color:var(--osso)}
+.topo .btn{padding:10px 16px}
+@media (max-width:900px){.topo nav a:not(.btn){display:none}}
+
+/* ---------- hero dividido ---------- */
+.hero{min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,60px);align-items:end;padding-top:110px;padding-bottom:50px}
+.hero__status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--linha);border-radius:999px;padding:8px 14px;margin-bottom:26px}
+.hero__status i{width:8px;height:8px;border-radius:50%;background:#7a7a7a}
+.hero__status.aberto i{background:#3ecf6e;box-shadow:0 0 0 4px rgba(62,207,110,.18)}
+.hero h1{font-family:var(--titulo);font-weight:400;font-size:clamp(84px,15vw,230px);line-height:.82;margin:0;letter-spacing:-.01em}
+.hero h1 .l{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .l > span{display:inline-block}
+.hero h1 .l:last-child{color:transparent;-webkit-text-stroke:1.5px var(--osso)}
+.hero__texto{max-width:44ch;color:var(--osso-2);margin:26px 0 30px;font-size:clamp(16px,1.4vw,19px)}
+.hero__cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero__foto{position:relative;height:min(74svh,700px);border-radius:var(--raio);overflow:hidden;background:var(--fundo-2)}
+.hero__foto img{width:100%;height:120%;object-fit:cover;filter:grayscale(1) contrast(1.1)}
+.hero__foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(15,14,13,.85))}
+.hero__credito{position:absolute;left:16px;bottom:14px;z-index:2;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--osso-2)}
+.hero__selo{position:absolute;top:16px;right:16px;z-index:2;width:110px;height:110px}
+.hero__selo text{font-family:var(--mono);font-size:10.5px;letter-spacing:.32em;fill:var(--osso);text-transform:uppercase}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;align-items:start;padding-top:100px}
+  .hero__foto{height:58svh;order:2}
+}
+
+/* ---------- faixa fina ---------- */
+.faixa{border-block:1px solid var(--linha);overflow:hidden;padding:16px 0;background:var(--fundo)}
+.faixa__trilho{display:flex;width:max-content}
+.faixa span{font-family:var(--titulo);font-size:clamp(34px,4.6vw,60px);line-height:1;padding-inline:26px;white-space:nowrap;color:transparent;-webkit-text-stroke:1px var(--osso-2)}
+.faixa span:nth-child(3n+1){color:var(--osso);-webkit-text-stroke:0}
+.faixa span::after{content:"✦";color:var(--destaque);-webkit-text-stroke:0;font-family:var(--corpo);font-size:.45em;margin-left:52px;vertical-align:middle}
+
+/* ---------- 1. orçamento ---------- */
+.orc{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,60px);margin-top:50px;align-items:start}
+.grupo{border-top:1px solid var(--linha);padding:22px 0}
+.grupo h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--osso-2);margin:0 0 14px;font-weight:400}
+.opcoes{display:flex;flex-wrap:wrap;gap:8px}
+.op{border:1px solid var(--linha);border-radius:999px;padding:10px 16px;background:transparent;cursor:pointer;font-size:15px;transition:border-color .2s,background .2s,color .2s}
+.op:hover{border-color:var(--osso-2)}
+.op[aria-pressed="true"]{background:var(--osso);color:var(--fundo);border-color:var(--osso)}
+.op small{display:block;font-family:var(--mono);font-size:10.5px;opacity:.65;letter-spacing:.04em}
+.resumo{position:sticky;top:90px;background:var(--fundo-2);border:1px solid var(--linha);border-radius:var(--raio);padding:28px}
+.resumo__faixa{font-family:var(--titulo);font-size:clamp(46px,5vw,68px);line-height:1;margin:6px 0 4px}
+.resumo__faixa small{font-family:var(--corpo);font-size:16px;color:var(--osso-2)}
+.resumo dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:18px 0;font-size:15px}
+.resumo dt{color:var(--osso-2)}
+.resumo dd{margin:0;text-align:right}
+.resumo textarea{width:100%;min-height:76px;background:var(--fundo);color:var(--osso);border:1px solid var(--linha);border-radius:var(--raio);padding:12px;font:inherit;font-size:15px;resize:vertical}
+.resumo .btn{width:100%;margin-top:14px}
+.nota{font-size:13px;color:var(--osso-2);margin:12px 0 0}
+@media (max-width:900px){.orc{grid-template-columns:1fr}.resumo{position:static}}
+
+/* ---------- 2. galeria em grade com filtro ---------- */
+.galeria__topo{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.grade{columns:3 260px;column-gap:14px;margin-top:40px}
+.foto{break-inside:avoid;margin:0 0 14px;position:relative;border-radius:var(--raio);overflow:hidden;cursor:zoom-in;background:var(--fundo-2)}
+.foto img{width:100%;height:auto;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .5s;filter:grayscale(.35)}
+.foto:hover img{transform:scale(1.05);filter:none}
+.foto figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 12px;background:linear-gradient(transparent,rgba(15,14,13,.85));font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between}
+.foto.some{display:none}
+@media (max-width:560px){.grade{columns:2;column-gap:10px}.foto{margin-bottom:10px}.foto figcaption{font-size:10px;padding:24px 8px 8px}}
+.zoom{position:fixed;inset:0;z-index:85;background:rgba(10,9,8,.94);display:none;place-items:center;padding:4vw}
+.zoom.aberto{display:grid}
+.zoom img{max-height:86svh;width:auto;border-radius:var(--raio)}
+.zoom__fechar{position:absolute;top:16px;right:16px}
+
+/* ---------- 3. estilos (lista com prévia que segue o cursor) ---------- */
+.estilos{margin-top:40px;border-bottom:1px solid var(--linha)}
+.estilo{display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:20px;border-top:1px solid var(--linha);padding:22px 0;position:relative}
+.estilo__n{font-family:var(--mono);font-size:13px;color:var(--osso-2)}
+.estilo h3{font-family:var(--titulo);font-weight:400;font-size:clamp(40px,6vw,84px);line-height:1;margin:0;transition:transform .4s,color .3s}
+.estilo p{margin:0;max-width:34ch;color:var(--osso-2);font-size:15px;text-align:right}
+.estilo:hover h3{transform:translateX(18px);color:var(--destaque)}
+.previa{position:fixed;left:0;top:0;width:220px;aspect-ratio:4/5;z-index:40;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.6);border-radius:var(--raio);overflow:hidden;background:var(--osso)}
+.previa img{width:100%;height:100%;object-fit:cover}
+@media (max-width:760px){.estilo{grid-template-columns:40px 1fr}.estilo p{grid-column:2;text-align:left}.previa{display:none}}
+
+/* ---------- 4. flash day ---------- */
+.flash{background:var(--osso);color:var(--fundo)}
+.flash .etiqueta{color:var(--destaque)}
+.flash .lead{color:#5a554d}
+.flash__grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:18px;margin-top:44px}
+.carta{border:1.5px solid var(--fundo);border-radius:var(--raio);padding:14px;background:#f6f1e7;display:flex;flex-direction:column;gap:10px;transition:transform .35s,box-shadow .35s}
+.carta:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:8px 8px 0 var(--fundo)}
+.carta__arte{aspect-ratio:1;background:#fbf8f1;border:1px dashed rgba(15,14,13,.3);border-radius:4px;display:grid;place-items:center}
+.carta__arte svg{width:74%;height:74%}
+.carta__linha{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.carta h3{font-family:var(--titulo);font-weight:400;font-size:30px;margin:0;line-height:1}
+.carta b{font-family:var(--mono);font-size:15px}
+.carta small{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b655c}
+.carta .btn{border-color:var(--fundo);padding:10px 14px}
+.carta .btn:hover{background:var(--fundo);color:var(--osso)}
+.carta.reservada{opacity:.45}
+.carta.reservada .btn{pointer-events:none}
+.flash__data{display:inline-flex;gap:10px;align-items:center;background:var(--fundo);color:var(--osso);border-radius:999px;padding:8px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-top:22px}
+.flash__data b{color:var(--destaque)}
+@media (max-width:560px){.flash__grade{grid-template-columns:1fr 1fr;gap:12px}.carta{padding:10px}.carta h3{font-size:24px}.carta b{font-size:13px}.carta .btn{padding:9px 8px;font-size:11px}}
+
+/* ---------- 5. artistas ---------- */
+.equipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(16px,2vw,28px);margin-top:44px}
+.artista{position:relative}
+.artista__foto{aspect-ratio:3/4;border-radius:var(--raio);overflow:hidden;background:var(--fundo-2);position:relative}
+.artista__foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .5s,transform .7s}
+.artista:hover .artista__foto img{filter:none;transform:scale(1.04)}
+.artista__num{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:12px;background:var(--fundo);border:1px solid var(--linha);border-radius:999px;padding:4px 10px}
+.artista h3{font-family:var(--titulo);font-weight:400;font-size:44px;line-height:1;margin:16px 0 4px}
+.artista__estilos{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--destaque);margin:0 0 14px}
+.artista__botoes{display:flex;gap:8px;flex-wrap:wrap}
+.artista__botoes .btn{flex:1;padding:11px 12px}
+
+/* ---------- 6. cuidados + perguntas ---------- */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px)}
+@media (max-width:900px){.duas{grid-template-columns:1fr}}
+.linha-tempo{list-style:none;margin:30px 0 0;padding:0;position:relative}
+.linha-tempo::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:var(--linha)}
+.linha-tempo .agulha{position:absolute;left:7px;top:6px;width:1px;height:0;background:var(--destaque)}
+.linha-tempo li{position:relative;padding:0 0 26px 38px}
+.linha-tempo li::before{content:"";position:absolute;left:0;top:6px;width:15px;height:15px;border-radius:50%;background:var(--fundo);border:1.5px solid var(--destaque)}
+.linha-tempo b{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--destaque);margin-bottom:4px}
+.linha-tempo p{margin:0;color:var(--osso-2)}
+.faq{margin-top:30px;border-bottom:1px solid var(--linha)}
+.faq details{border-top:1px solid var(--linha)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:600;font-size:18px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:14px;font-size:28px;font-weight:300;color:var(--destaque);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 20px;color:var(--osso-2);max-width:60ch}
+
+/* ---------- 7. local ---------- */
+.local{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);align-items:start}
+@media (max-width:900px){.local{grid-template-columns:1fr}}
+.horarios{width:100%;border-collapse:collapse;font-size:16px}
+.horarios td{padding:12px 0;border-top:1px solid var(--linha)}
+.horarios td:last-child{text-align:right;font-family:var(--mono);font-size:14px}
+.horarios tr.hoje td{color:var(--destaque);font-weight:600}
+.endereco{font-size:clamp(22px,2.4vw,30px);line-height:1.25;margin:0 0 22px}
+
+/* ---------- rodapé ---------- */
+.rodape{border-top:1px solid var(--linha);padding-top:60px;padding-bottom:30px;overflow:hidden}
+.rodape__grande{font-family:var(--titulo);font-size:clamp(110px,26vw,420px);line-height:.8;margin:0;color:transparent;-webkit-text-stroke:1px var(--osso-2);white-space:nowrap}
+.rodape__base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 30px;margin-top:30px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--osso-2)}
+.rodape__base b{color:var(--osso)}
+@media (max-width:640px){.rodape{padding-bottom:110px}}
+
+/* ---------- selo de demonstração, botão flutuante, janela ---------- */
+.demo{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--osso);color:var(--fundo);border-radius:999px;padding:8px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.flutua{position:fixed;right:16px;bottom:16px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--destaque);border:0;display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.flutua svg{width:28px;height:28px;color:var(--osso)}
+.janela{position:fixed;inset:0;z-index:88;display:none;place-items:center;background:rgba(10,9,8,.8);padding:18px}
+.janela.aberta{display:grid}
+.janela__caixa{background:var(--osso);color:var(--fundo);border-radius:10px;max-width:520px;width:100%;padding:26px;max-height:88svh;overflow:auto}
+.janela__caixa h2{font-family:var(--titulo);font-weight:400;font-size:40px;line-height:1;margin:0 0 8px}
+.janela__caixa pre{white-space:pre-wrap;font-family:var(--mono);font-size:13px;background:#f6f1e7;border:1px dashed rgba(15,14,13,.3);border-radius:6px;padding:14px;margin:14px 0}
+.janela__caixa .btn{border-color:var(--fundo)}
+.janela__caixa .btn:hover{background:var(--fundo);color:var(--osso)}
+
+@media (max-width:640px){.demo{bottom:auto;top:64px;left:50%;transform:translateX(-50%);font-size:10px;padding:6px 12px;white-space:nowrap}}
+@media (prefers-reduced-motion:reduce){.loader{display:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<!-- =========================================================
+     CONFIGURAÇÃO DO SITE — para um cliente, edite só este bloco
+     - whatsapp: só números com DDI e DDD ("5519999999999").
+       Vazio = modo demonstração (mostra a mensagem numa janela).
+     - Cada artista pode ter o próprio WhatsApp; vazio = usa o do estúdio.
+     - Preços do orçamento: base por tamanho × estilo × cor × região.
+     ========================================================= -->
+<script>
+window.ESTUDIO = {
+  nome: "Estúdio Corvo",
+  instagram: "estudiocorvo",
+  whatsapp: "",
+  cidade: "Campinas",
+  bairro: "Cambuí",
+  endereco: "Rua de Exemplo, 123",
+  fuso: "America/Sao_Paulo",
+  // horário por dia da semana (0 = domingo); null = fechado
+  horarios: [null, null, ["10:00","19:00"], ["10:00","19:00"], ["10:00","20:00"], ["10:00","20:00"], ["10:00","16:00"]],
+  estilos: [
+    { nome: "Fineline",    fator: 1.00, texto: "Traço fino e delicado, ótimo para peças pequenas e escritas." },
+    { nome: "Blackwork",   fator: 1.15, texto: "Preenchimento sólido em preto, desenhos de alto contraste." },
+    { nome: "Old school",  fator: 1.10, texto: "Traço grosso e cores chapadas, o clássico que não sai de moda." },
+    { nome: "Realismo",    fator: 1.40, texto: "Retratos e cenas com sombra e profundidade." },
+    { nome: "Pontilhismo", fator: 1.25, texto: "Sombra feita ponto a ponto, textura única." },
+    { nome: "Lettering",   fator: 0.90, texto: "Frases e nomes com letras desenhadas à mão." }
+  ],
+  tamanhos: [
+    { nome: "Até 5 cm",  base: 250 }, { nome: "5 a 10 cm", base: 400 }, { nome: "10 a 15 cm", base: 650 },
+    { nome: "15 a 20 cm", base: 900 }, { nome: "Fechamento", base: 2400 }
+  ],
+  regioes: [
+    { nome: "Braço", fator: 1 }, { nome: "Antebraço", fator: 1 }, { nome: "Perna", fator: 1 },
+    { nome: "Costas", fator: 1.1 }, { nome: "Costela", fator: 1.2 }, { nome: "Mão ou pescoço", fator: 1.25 }
+  ],
+  cores: [ { nome: "Preto e cinza", fator: 1 }, { nome: "Colorida", fator: 1.2 } ],
+  valorSessao: 1200,        // acima disso, divide em sessões
+  sinal: 0.3,               // sinal para reservar a data (30%)
+  minimo: 200,
+  artistas: [
+    { nome: "Rafa Breu",   handle: "estudiocorvo", estilos: ["Blackwork","Pontilhismo"], whatsapp: "",
+      foto: "https://images.unsplash.com/photo-1769605767701-6e5a680ef685?w=700&q=70&fm=jpg&auto=format" },
+    { nome: "Lua Andrade", handle: "estudiocorvo", estilos: ["Fineline","Lettering"], whatsapp: "",
+      foto: "https://images.unsplash.com/photo-1775135981378-4e7c1767436d?w=700&q=70&fm=jpg&auto=format" },
+    { nome: "Téo Nunes",   handle: "estudiocorvo", estilos: ["Old school","Realismo"], whatsapp: "",
+      foto: "https://images.unsplash.com/photo-1775134061575-80f4bbd1a189?w=700&q=70&fm=jpg&auto=format" }
+  ],
+  // galeria: foto + nome do artista (o filtro usa o nome)
+  galeria: [
+    ["photo-1568515045052-f9a854d70bfd","Rafa Breu"], ["photo-1597852075234-fd721ac361d3","Lua Andrade"],
+    ["photo-1552627019-947c3789ffb5","Téo Nunes"],    ["photo-1564426622559-5af68da63b96","Rafa Breu"],
+    ["photo-1479767574301-a01c78234a0c","Téo Nunes"], ["photo-1662753361921-e6784e43f88b","Lua Andrade"],
+    ["photo-1513078094721-e7b6e0394a6a","Rafa Breu"], ["photo-1769485016772-c5a4234a6be3","Lua Andrade"],
+    ["photo-1516008684536-605574d804ce","Téo Nunes"]
+  ],
+  // flash day: desenhos prontos com preço fixo (desenho = nome de um símbolo abaixo)
+  flashDia: "sábado, 10h às 16h",
+  flashes: [
+    { nome: "Lua",      desenho: "f-lua",     tamanho: "7 cm",  preco: 280 },
+    { nome: "Adaga",    desenho: "f-adaga",   tamanho: "10 cm", preco: 350, reservado: true },
+    { nome: "Olho",     desenho: "f-olho",    tamanho: "6 cm",  preco: 260 },
+    { nome: "Coração",  desenho: "f-coracao", tamanho: "8 cm",  preco: 300 },
+    { nome: "Raio",     desenho: "f-raio",    tamanho: "5 cm",  preco: 220 },
+    { nome: "Serpente", desenho: "f-cobra",   tamanho: "12 cm", preco: 420 },
+    { nome: "Estrela",  desenho: "f-estrela", tamanho: "4 cm",  preco: 200 },
+    { nome: "Rosa",     desenho: "f-rosa",    tamanho: "9 cm",  preco: 340 }
+  ],
+  perguntas: [
+    ["Qual a idade mínima?", "Atendemos apenas maiores de 18 anos, com documento com foto no dia da sessão."],
+    ["Como funciona o sinal?", "Para reservar a data, pedimos um sinal de 30% do valor, descontado no dia. Remarcação gratuita com 48h de antecedência."],
+    ["O retoque é cobrado?", "O primeiro retoque, até 60 dias depois da sessão, é gratuito."],
+    ["Posso levar minha própria arte?", "Pode, sim. O artista adapta o desenho ao seu corpo e ao estilo, e você aprova antes de começar."],
+    ["Dói muito?", "Depende da região e da sua sensibilidade. Costela, mão e pés costumam doer mais; braço e antebraço, menos."],
+    ["Quais formas de pagamento?", "Pix, débito e crédito em até 3 vezes sem juros."]
+  ]
+};
+</script>
+
+<div class="loader" aria-hidden="true">
+  <svg viewBox="0 0 100 100"><path d="M50 4 L59 41 L96 50 L59 59 L50 96 L41 59 L4 50 L41 41 Z"/></svg>
+  <div class="loader__nome" data-nome></div>
+</div>
+<div class="ruido" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="previa" aria-hidden="true"><img alt=""></div>
+
+<header class="topo">
+  <a class="marca" href="#inicio" data-marca>Estúdio <b>Corvo</b></a>
+  <nav>
+    <a href="#orcamento">Orçamento</a><a href="#trabalhos">Trabalhos</a><a href="#flash">Flash day</a><a href="#artistas">Artistas</a>
+    <a class="btn btn--cheio" href="#orcamento">Agendar</a>
+  </nav>
+</header>
+
+<main id="inicio">
+  <section class="hero wrap" aria-labelledby="t-hero">
+    <div>
+      <div class="hero__status" data-status><i></i><span>Verificando horário…</span></div>
+      <h1 id="t-hero"><span class="l"><span data-nome-1>Estúdio</span></span><span class="l"><span data-nome-2>Corvo</span></span></h1>
+      <p class="hero__texto">Tatuagem autoral no <span data-bairro>Cambuí</span>, em <span data-cidade>Campinas</span>. Saiba quanto custa a sua ideia em 30 segundos e reserve o horário direto no WhatsApp.</p>
+      <div class="hero__cta">
+        <a class="btn btn--cheio" href="#orcamento">Fazer orçamento</a>
+        <a class="btn" href="#trabalhos">Ver trabalhos</a>
+      </div>
+    </div>
+    <div class="hero__foto">
+      <img src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?w=1100&q=70&fm=jpg&auto=format" alt="Artista tatuando um braço" data-paralaxe>
+      <svg class="hero__selo" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+        <g class="selo-giro"><text><textPath href="#circ">Material descartável · Arte autoral ·</textPath></text></g>
+        <path d="M60 44 L63 57 L76 60 L63 63 L60 76 L57 63 L44 60 L57 57 Z" fill="var(--destaque)"/>
+      </svg>
+      <span class="hero__credito">Foto: Lucas Lenzi / Unsplash</span>
+    </div>
+  </section>
+
+  <div class="faixa" aria-hidden="true"><div class="faixa__trilho" data-faixa></div></div>
+
+  <!-- 1. ORÇAMENTO -->
+  <section class="secao wrap" id="orcamento" aria-labelledby="t-orc">
+    <div class="etiqueta">01 · Orçamento na hora</div>
+    <h2 class="h2" id="t-orc">Quanto custa a <em>sua ideia?</em></h2>
+    <p class="lead">Escolha estilo, tamanho, cor e lugar do corpo. O valor é uma estimativa; o artista confirma depois de ver a referência.</p>
+    <div class="orc">
+      <div>
+        <div class="grupo"><h3>Estilo</h3><div class="opcoes" data-grupo="estilo"></div></div>
+        <div class="grupo"><h3>Tamanho</h3><div class="opcoes" data-grupo="tamanho"></div></div>
+        <div class="grupo"><h3>Cor</h3><div class="opcoes" data-grupo="cor"></div></div>
+        <div class="grupo"><h3>Lugar do corpo</h3><div class="opcoes" data-grupo="regiao"></div></div>
+        <div class="grupo"><h3>Artista</h3><div class="opcoes" data-grupo="artista"></div></div>
+      </div>
+      <aside class="resumo" aria-live="polite">
+        <div class="etiqueta" style="margin:0">Estimativa</div>
+        <div class="resumo__faixa" data-faixa-preco>—</div>
+        <dl data-resumo></dl>
+        <label class="oculto" for="ideia">Conte sua ideia</label>
+        <textarea id="ideia" placeholder="Conte sua ideia (ex.: uma lua com flores no antebraço)"></textarea>
+        <button class="btn btn--cheio" type="button" data-enviar-orc><svg aria-hidden="true"><use href="#i-whats"/></svg> Enviar pelo WhatsApp</button>
+        <p class="nota">Mande a foto de referência na conversa. Sinal de <span data-sinal>30%</span> para reservar a data.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 2. TRABALHOS -->
+  <section class="secao wrap" id="trabalhos" aria-labelledby="t-trab" style="padding-top:0">
+    <div class="galeria__topo">
+      <div><div class="etiqueta">02 · Trabalhos</div><h2 class="h2" id="t-trab">Feito <em>aqui</em></h2></div>
+      <div class="filtros" data-filtros role="group" aria-label="Filtrar por artista"></div>
+    </div>
+    <div class="grade" data-grade></div>
+  </section>
+
+  <!-- 3. ESTILOS -->
+  <section class="secao wrap" aria-labelledby="t-est" style="padding-top:0">
+    <div class="etiqueta">03 · Estilos</div>
+    <h2 class="h2" id="t-est">Do traço fino ao <em>fechamento</em></h2>
+    <div class="estilos" data-estilos></div>
+  </section>
+
+  <!-- 4. FLASH DAY -->
+  <section class="secao wrap flash" id="flash" aria-labelledby="t-flash">
+    <div class="etiqueta">04 · Flash day</div>
+    <h2 class="h2" id="t-flash">Desenho pronto, <em>preço fechado</em></h2>
+    <p class="lead">Escolha um flash, reserve pelo WhatsApp e tatue no próximo flash day. Cada desenho é tatuado uma única vez.</p>
+    <div class="flash__data">Próximo flash day: <b data-flash-dia></b></div>
+    <div class="flash__grade" data-flashes></div>
+  </section>
+
+  <!-- 5. ARTISTAS -->
+  <section class="secao wrap" id="artistas" aria-labelledby="t-art">
+    <div class="etiqueta">05 · Artistas</div>
+    <h2 class="h2" id="t-art">Escolha <em>o traço</em></h2>
+    <div class="equipe" data-equipe></div>
+  </section>
+
+  <!-- 6. CUIDADOS E PERGUNTAS -->
+  <section class="secao wrap" aria-label="Cuidados e perguntas" style="padding-top:0">
+    <div class="duas">
+      <div>
+        <div class="etiqueta">06 · Depois da sessão</div>
+        <h2 class="h2">Cuidados</h2>
+        <ol class="linha-tempo" data-tempo>
+          <span class="agulha"></span>
+          <li><b>Primeiras 4 horas</b><p>Mantenha o plástico. Depois, lave com água fria e sabonete neutro.</p></li>
+          <li><b>Dias 1 a 7</b><p>Pomada cicatrizante em camada fina, 3 vezes ao dia. Nada de piscina, mar ou sol.</p></li>
+          <li><b>Dias 8 a 15</b><p>A pele descasca: não coce nem arranque as casquinhas. Troque a pomada por hidratante sem perfume.</p></li>
+          <li><b>Depois de 30 dias</b><p>Tatuagem cicatrizada. Use protetor solar para manter o preto e as cores vivas.</p></li>
+        </ol>
+      </div>
+      <div>
+        <div class="etiqueta">07 · Perguntas</div>
+        <h2 class="h2">Antes de vir</h2>
+        <div class="faq" data-faq></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. LOCAL -->
+  <section class="secao wrap" id="local" aria-labelledby="t-local" style="padding-top:0">
+    <div class="etiqueta">08 · Onde estamos</div>
+    <div class="local">
+      <div>
+        <h2 class="h2" id="t-local" data-bairro-grande>Cambuí</h2>
+        <p class="endereco" data-endereco></p>
+        <div class="hero__cta"><a class="btn btn--cheio" data-mapa target="_blank" rel="noopener" href="#">Como chegar</a><a class="btn" data-ig target="_blank" rel="noopener" href="#">Instagram</a></div>
+      </div>
+      <table class="horarios"><caption class="oculto">Horários</caption><tbody data-horarios></tbody></table>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape wrap">
+  <p class="rodape__grande" aria-hidden="true" data-rodape>Corvo</p>
+  <div class="rodape__base"><span>Site de exemplo. Marca, artistas e preços fictícios. Fotos: Unsplash.</span><span>Site criado por <b>Porta Ad Omnia</b></span></div>
+</footer>
+
+<div class="demo" data-demo hidden>Marca fictícia · demonstração</div>
+<button class="flutua" type="button" data-zap-geral aria-label="Falar no WhatsApp"><svg aria-hidden="true"><use href="#i-whats"/></svg></button>
+
+<div class="zoom" data-zoom role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button class="btn zoom__fechar" type="button" data-fecha-zoom>Fechar ×</button><img alt="">
+</div>
+<div class="janela" data-janela role="dialog" aria-modal="true" aria-labelledby="t-janela">
+  <div class="janela__caixa">
+    <h2 id="t-janela">Mensagem pronta</h2>
+    <p>Neste site de exemplo, a mensagem aparece aqui. No site do estúdio, ela abre direto no WhatsApp:</p>
+    <pre data-janela-texto></pre>
+    <button class="btn" type="button" data-fecha-janela>Fechar</button>
+  </div>
+</div>
+
+<!-- ícones e desenhos dos flashes (traço) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-whats" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.46 9.48-9.46 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.06-17.52A11.32 11.32 0 0 0 12.04.64C5.76.64.66 5.74.65 12.01c0 2 .52 3.96 1.52 5.69L.56 23.6l6.04-1.58a11.36 11.36 0 0 0 5.43 1.38h.01c6.27 0 11.38-5.1 11.38-11.37 0-3.04-1.18-5.9-3.33-8.05z"/></symbol>
+  <g id="flashes">
+    <symbol id="f-lua" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M62 14a38 38 0 1 0 24 58A30 30 0 1 1 62 14z" fill="#0f0e0d"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#d4322c" stroke="none"/><circle cx="80" cy="60" r="2.5" fill="#0f0e0d"/></symbol>
+    <symbol id="f-adaga" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 L58 60 L42 60 Z" fill="#ece6da" stroke="#0f0e0d" stroke-width="3"/><path d="M50 14 L50 56" stroke="#0f0e0d" stroke-width="1.6"/><path d="M30 62 H70" stroke="#0f0e0d" stroke-width="6" stroke-linecap="round"/><path d="M50 64 V84" stroke="#0f0e0d" stroke-width="7"/><circle cx="50" cy="90" r="5" fill="#d4322c" stroke="#0f0e0d" stroke-width="3"/></symbol>
+    <symbol id="f-olho" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 50 Q50 12 90 50 Q50 88 10 50Z" fill="#ece6da" stroke="#0f0e0d" stroke-width="3.4"/><circle cx="50" cy="50" r="15" fill="#0f0e0d"/><circle cx="45" cy="45" r="4" fill="#ece6da"/><path d="M26 30 L20 20 M50 22 V10 M74 30 L80 20" stroke="#0f0e0d" stroke-width="3"/><path d="M50 72 L46 84 L50 92 L54 84 Z" fill="#d4322c" stroke="#0f0e0d" stroke-width="2.4"/></symbol>
+    <symbol id="f-coracao" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M50 86 C16 62 8 44 18 28 C28 14 46 18 50 32 C54 18 72 14 82 28 C92 44 84 62 50 86Z" fill="#d4322c" stroke="#0f0e0d" stroke-width="3.4"/><path d="M30 34 C34 28 40 28 42 32" stroke="#ece6da" stroke-width="3"/><path d="M14 72 C30 64 70 64 86 72 L82 80 C66 74 34 74 18 80 Z" fill="#ece6da" stroke="#0f0e0d" stroke-width="3"/></symbol>
+    <symbol id="f-raio" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M58 6 L22 56 H48 L40 94 L78 40 H52 Z" fill="#d4322c" stroke="#0f0e0d" stroke-width="3.6"/></symbol>
+    <symbol id="f-cobra" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 90 C10 74 30 64 50 62 C76 60 86 44 70 34 C56 26 34 34 30 22 C26 12 40 6 54 10" stroke="#0f0e0d" stroke-width="11"/><path d="M24 90 C10 74 30 64 50 62 C76 60 86 44 70 34 C56 26 34 34 30 22 C26 12 40 6 54 10" stroke="#ece6da" stroke-width="4" stroke-dasharray="2 7"/><path d="M54 10 l10 -2 -4 8z" fill="#0f0e0d"/><path d="M64 9 l8 -3 M64 9 l7 3" stroke="#d4322c" stroke-width="2"/></symbol>
+    <symbol id="f-estrela" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 L61 39 L94 39 L67 59 L77 91 L50 71 L23 91 L33 59 L6 39 L39 39 Z" fill="#ece6da" stroke="#0f0e0d" stroke-width="3.4"/><path d="M50 30 L55 45 L70 45 L58 54 L62 69 L50 60 L38 69 L42 54 L30 45 L45 45 Z" fill="#d4322c" stroke="none"/></symbol>
+    <symbol id="f-rosa" viewBox="0 0 100 100" fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="38" r="26" fill="#d4322c" stroke="#0f0e0d" stroke-width="3.4"/><path d="M50 24 C40 26 38 40 48 42 C58 44 60 32 52 30 M36 44 C40 56 60 58 66 44 M30 32 C30 20 44 12 56 14" stroke="#0f0e0d" stroke-width="2.6"/><path d="M50 64 V94" stroke="#0f0e0d" stroke-width="3.4"/><path d="M50 78 C38 70 26 74 24 82 C34 86 44 84 50 78Z M50 84 C60 76 72 78 76 86 C66 90 56 90 50 84Z" fill="#ece6da" stroke="#0f0e0d" stroke-width="2.6"/></symbol>
+  </g>
+</svg>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  const C = window.ESTUDIO;
+  const $ = (s, el=document) => el.querySelector(s);
+  const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const temGSAP = typeof window.gsap !== "undefined";
+  if (!temGSAP) document.documentElement.classList.add("sem-js");
+  const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+  const igURL = h => `https://www.instagram.com/${h}/`;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const unsplash = (id, w) => `https://images.unsplash.com/${id}?w=${w}&q=70&fm=jpg&auto=format`;
+
+  /* ---------- WhatsApp ou janela de demonstração ---------- */
+  const demo = !C.whatsapp && !C.artistas.some(a => a.whatsapp);
+  if (demo) $("[data-demo]").hidden = false;
+  function enviar(texto, numero){
+    const n = numero || C.whatsapp;
+    if (n) { window.open(`https://wa.me/${n}?text=${encodeURIComponent(texto)}`, "_blank", "noopener"); return; }
+    $("[data-janela-texto]").textContent = texto;
+    $("[data-janela]").classList.add("aberta");
+  }
+  $("[data-fecha-janela]").addEventListener("click", () => $("[data-janela]").classList.remove("aberta"));
+  $("[data-janela]").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove("aberta"); });
+  $("[data-zap-geral]").addEventListener("click", () => enviar(`Olá! Vi o site do ${C.nome} e quero tirar uma dúvida sobre tatuagem.`));
+
+  /* ---------- textos da configuração ---------- */
+  const [n1, ...resto] = C.nome.split(" ");
+  const n2 = resto.join(" ") || n1;
+  $("[data-nome-1]").textContent = resto.length ? n1 : "";
+  $("[data-nome-2]").textContent = n2;
+  $("[data-marca]").innerHTML = resto.length ? `${esc(n1)} <b>${esc(n2)}</b>` : `<b>${esc(n1)}</b>`;
+  $("[data-nome]").textContent = C.nome;
+  $("[data-rodape]").textContent = n2;
+  $$("[data-bairro]").forEach(e => e.textContent = C.bairro);
+  $$("[data-cidade]").forEach(e => e.textContent = C.cidade);
+  $("[data-bairro-grande]").textContent = C.bairro;
+  $("[data-endereco]").textContent = `${C.endereco} · ${C.bairro}, ${C.cidade}`;
+  $("[data-mapa]").href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(`${C.endereco}, ${C.bairro}, ${C.cidade}`);
+  $("[data-ig]").href = igURL(C.instagram);
+  $("[data-sinal]").textContent = Math.round(C.sinal * 100) + "%";
+  $("[data-flash-dia]").textContent = C.flashDia;
+
+  /* ---------- aberto agora + horários ---------- */
+  const DIAS = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  const agora = new Date(new Date().toLocaleString("en-US", { timeZone: C.fuso }));
+  const hoje = agora.getDay(), minAgora = agora.getHours()*60 + agora.getMinutes();
+  const min = h => { const [a,b] = h.split(":").map(Number); return a*60 + b; };
+  $("[data-horarios]").innerHTML = [1,2,3,4,5,6,0].map(d => {
+    const h = C.horarios[d];
+    return `<tr class="${d===hoje?"hoje":""}"><td>${DIAS[d]}${d===hoje?" · hoje":""}</td><td>${h ? h.join(" – ") : "Fechado"}</td></tr>`;
+  }).join("");
+  const hh = C.horarios[hoje], st = $("[data-status]");
+  const aberto = hh && minAgora >= min(hh[0]) && minAgora < min(hh[1]);
+  st.classList.toggle("aberto", !!aberto);
+  let prox = ""; for (let k = 1; k <= 7 && !prox; k++){ const d = (hoje + k) % 7; if (C.horarios[d]) prox = `${k===1?"amanhã":DIAS[d].toLowerCase()} às ${C.horarios[d][0]}`; }
+  $("span", st).textContent = aberto ? `Aberto agora · até ${hh[1]}`
+    : (hh && minAgora < min(hh[0])) ? `Fechado · abre hoje às ${hh[0]}` : `Fechado · abre ${prox}`;
+
+  /* ---------- orçamento ---------- */
+  const escolha = { estilo: 0, tamanho: 1, cor: 0, regiao: 0, artista: -1 };
+  const listas = {
+    estilo: C.estilos.map(e => ({ nome: e.nome })),
+    tamanho: C.tamanhos.map(t => ({ nome: t.nome })),
+    cor: C.cores.map(c => ({ nome: c.nome })),
+    regiao: C.regioes.map(r => ({ nome: r.nome })),
+    artista: [{ nome: "Tanto faz", v: -1 }].concat(C.artistas.map((a,i) => ({ nome: a.nome, sub: a.estilos.join(" · "), v: i })))
+  };
+  Object.entries(listas).forEach(([g, itens]) => {
+    const box = $(`[data-grupo="${g}"]`);
+    box.innerHTML = itens.map((it, i) => `<button type="button" class="op" data-v="${it.v ?? i}">${esc(it.nome)}${it.sub ? `<small>${esc(it.sub)}</small>` : ""}</button>`).join("");
+    box.addEventListener("click", e => { const b = e.target.closest(".op"); if (!b) return; escolha[g] = Number(b.dataset.v); calcula(); });
+  });
+  const arred = v => Math.round(v / 10) * 10;
+  function calcula(){
+    Object.keys(listas).forEach(g => $$(`[data-grupo="${g}"] .op`).forEach(b => b.setAttribute("aria-pressed", Number(b.dataset.v) === escolha[g])));
+    const est = C.estilos[escolha.estilo], tam = C.tamanhos[escolha.tamanho], cor = C.cores[escolha.cor], reg = C.regioes[escolha.regiao];
+    const v = Math.max(C.minimo, tam.base * est.fator * cor.fator * reg.fator);
+    const de = arred(v * .9), ate = arred(v * 1.15), sessoes = Math.max(1, Math.ceil(ate / C.valorSessao));
+    $("[data-faixa-preco]").innerHTML = `${brl(de)} <small>a</small> ${brl(ate)}`;
+    const art = escolha.artista >= 0 ? C.artistas[escolha.artista].nome : "Quem tiver agenda";
+    $("[data-resumo]").innerHTML = [
+      ["Estilo", est.nome], ["Tamanho", tam.nome], ["Cor", cor.nome], ["Lugar", reg.nome], ["Artista", art],
+      ["Sessões", sessoes === 1 ? "1 sessão" : `cerca de ${sessoes} sessões`], ["Sinal", brl(arred(de * C.sinal))]
+    ].map(([a,b]) => `<dt>${a}</dt><dd>${esc(b)}</dd>`).join("");
+    return { est, tam, cor, reg, art, de, ate, sessoes };
+  }
+  calcula();
+  $("[data-enviar-orc]").addEventListener("click", () => {
+    const r = calcula(), ideia = $("#ideia").value.trim();
+    const a = escolha.artista >= 0 ? C.artistas[escolha.artista] : null;
+    enviar([
+      `Olá! Fiz o orçamento no site do ${C.nome}:`,
+      `• Estilo: ${r.est.nome}`, `• Tamanho: ${r.tam.nome}`, `• Cor: ${r.cor.nome}`, `• Lugar do corpo: ${r.reg.nome}`, `• Artista: ${r.art}`,
+      `• Estimativa: ${brl(r.de)} a ${brl(r.ate)} (${r.sessoes === 1 ? "1 sessão" : r.sessoes + " sessões"})`,
+      ideia ? `\nMinha ideia: ${ideia}` : "", `\nVou mandar a referência aqui na conversa.`
+    ].filter(Boolean).join("\n"), a && a.whatsapp);
+  });
+
+  /* ---------- galeria com filtro e zoom ---------- */
+  const nomesArt = C.artistas.map(a => a.nome);
+  $("[data-filtros]").innerHTML = ["Todos"].concat(nomesArt).map((n,i) => `<button type="button" class="op" aria-pressed="${i===0}" data-f="${esc(n)}">${esc(n)}</button>`).join("");
+  $("[data-grade]").innerHTML = C.galeria.map(([id, art]) => `
+    <figure class="foto" data-art="${esc(art)}"><img src="${unsplash(id, 700)}" data-grande="${unsplash(id, 1600)}" alt="Tatuagem feita por ${esc(art)}" loading="lazy">
+    <figcaption><span>${esc(art)}</span><span>Ver ↗</span></figcaption></figure>`).join("");
+  $("[data-filtros]").addEventListener("click", e => {
+    const b = e.target.closest(".op"); if (!b) return;
+    $$("[data-filtros] .op").forEach(x => x.setAttribute("aria-pressed", x === b));
+    $$(".foto").forEach(f => f.classList.toggle("some", b.dataset.f !== "Todos" && f.dataset.art !== b.dataset.f));
+    if (temGSAP && !reduz) gsap.fromTo(".foto:not(.some)", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .6, stagger: .05, ease: "power3.out", onComplete: () => window.ScrollTrigger && ScrollTrigger.refresh() });
+  });
+  const zoom = $("[data-zoom]");
+  $("[data-grade]").addEventListener("click", e => { const f = e.target.closest(".foto"); if (!f) return; const img = $("img", f); $("img", zoom).src = img.dataset.grande; $("img", zoom).alt = img.alt; zoom.classList.add("aberto"); });
+  zoom.addEventListener("click", e => { if (e.target === zoom || e.target.closest("[data-fecha-zoom]")) zoom.classList.remove("aberto"); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape"){ zoom.classList.remove("aberto"); $("[data-janela]").classList.remove("aberta"); } });
+
+  /* ---------- estilos: lista com prévia do flash seguindo o cursor ---------- */
+  const desenhos = C.flashes.map(f => f.desenho);
+  $("[data-estilos]").innerHTML = C.estilos.map((e,i) => `
+    <div class="estilo" data-d="${desenhos[i % desenhos.length]}"><span class="estilo__n">${String(i+1).padStart(2,"0")}</span><h3>${esc(e.nome)}</h3><p>${esc(e.texto)}</p></div>`).join("");
+  const svgDe = d => "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -15 130 130"><rect x="-15" y="-15" width="130" height="130" fill="#ece6da"/><g fill="none" stroke="#0f0e0d" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">${document.getElementById(d).innerHTML}</g></svg>`);
+
+  /* ---------- flash day ---------- */
+  $("[data-flashes]").innerHTML = C.flashes.map((f,i) => `
+    <article class="carta${f.reservado ? " reservada" : ""}">
+      <div class="carta__arte"><svg viewBox="0 0 100 100" role="img" aria-label="Desenho: ${esc(f.nome)}"><use href="#${f.desenho}"/></svg></div>
+      <div class="carta__linha"><h3>${esc(f.nome)}</h3><b>${brl(f.preco)}</b></div>
+      <small>${esc(f.tamanho)} · ${f.reservado ? "já reservado" : "disponível"}</small>
+      <button class="btn" type="button" data-flash="${i}">${f.reservado ? "Reservado" : "Quero este"}</button>
+    </article>`).join("");
+  $("[data-flashes]").addEventListener("click", e => {
+    const b = e.target.closest("[data-flash]"); if (!b) return;
+    const f = C.flashes[b.dataset.flash];
+    enviar(`Olá! Quero reservar o flash "${f.nome}" (${f.tamanho}, ${brl(f.preco)}) para o flash day de ${C.flashDia}.`);
+  });
+
+  /* ---------- artistas ---------- */
+  $("[data-equipe]").innerHTML = C.artistas.map((a,i) => `
+    <article class="artista">
+      <div class="artista__foto"><img src="${a.foto}" alt="${esc(a.nome)} trabalhando" loading="lazy"><span class="artista__num">${String(i+1).padStart(2,"0")}</span></div>
+      <h3>${esc(a.nome)}</h3>
+      <p class="artista__estilos">${a.estilos.map(esc).join(" · ")}</p>
+      <div class="artista__botoes">
+        <button class="btn btn--cheio" type="button" data-art-zap="${i}"><svg aria-hidden="true"><use href="#i-whats"/></svg>Agendar</button>
+        <a class="btn" href="${igURL(a.handle || C.instagram)}" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </article>`).join("");
+  $("[data-equipe]").addEventListener("click", e => {
+    const b = e.target.closest("[data-art-zap]"); if (!b) return;
+    const a = C.artistas[b.dataset.artZap];
+    enviar(`Olá, ${a.nome}! Vi seus trabalhos no site do ${C.nome} e quero fazer uma tatuagem.`, a.whatsapp);
+  });
+
+  /* ---------- perguntas ---------- */
+  $("[data-faq]").innerHTML = C.perguntas.map(([p,r]) => `<details><summary>${esc(p)}</summary><p>${esc(r)}</p></details>`).join("");
+
+  /* ---------- faixa ---------- */
+  const palavras = C.estilos.map(e => e.nome).concat(["Flash day", C.cidade]);
+  $("[data-faixa]").innerHTML = Array(4).fill(palavras.map(p => `<span>${esc(p)}</span>`).join("")).join("");
+
+  /* ---------- topo ---------- */
+  const topo = $(".topo");
+  const marcaTopo = () => topo.classList.toggle("rolou", scrollY > 40);
+  addEventListener("scroll", marcaTopo, { passive: true }); marcaTopo();
+
+  if (!temGSAP || reduz){ const l = $(".loader"); if (l) l.remove(); return; }
+
+  /* =========================================================
+     ANIMAÇÕES
+     ========================================================= */
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.Lenis){
+    const lenis = new Lenis({ lerp: .09 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
+      const alvo = a.getAttribute("href"); if (alvo.length < 2) return;
+      e.preventDefault(); lenis.scrollTo(alvo, { offset: -70 });
+    }));
+  }
+
+  // cursor de anel
+  const cur = $(".cursor");
+  const cx = gsap.quickTo(cur, "x", { duration: .25, ease: "power3" }), cy = gsap.quickTo(cur, "y", { duration: .25, ease: "power3" });
+  addEventListener("pointermove", e => { cx(e.clientX); cy(e.clientY); });
+  $$("a, button, .foto").forEach(el => { el.addEventListener("pointerenter", () => cur.classList.add("grande")); el.addEventListener("pointerleave", () => cur.classList.remove("grande")); });
+
+  // loader: a agulha desenha a estrela e a tela abre ao meio
+  const p = $(".loader path"), L = p.getTotalLength();
+  gsap.set(p, { strokeDasharray: L, strokeDashoffset: L });
+  gsap.timeline()
+    .to(p, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" })
+    .to(p, { fill: "#d4322c", duration: .3 }, "-=.15")
+    .to(".loader svg", { scale: 14, rotate: 45, opacity: 0, duration: .8, ease: "expo.in" }, "+=.1")
+    .to(".loader", { opacity: 0, duration: .35 }, "-=.25")
+    .set(".loader", { display: "none" })
+    .from(".hero h1 .l > span", { yPercent: 110, duration: 1.1, ease: "expo.out", stagger: .12 }, "-=.2")
+    .from(".hero__foto", { clipPath: "inset(100% 0 0 0)", duration: 1.3, ease: "expo.inOut" }, "<")
+    .from(".hero__status, .hero__texto, .hero__cta > *", { y: 20, opacity: 0, duration: .8, stagger: .08, ease: "power3.out" }, "-=.8");
+
+  gsap.to(".selo-giro", { rotate: 360, transformOrigin: "60px 60px", duration: 16, ease: "none", repeat: -1 });
+  gsap.to("[data-paralaxe]", { yPercent: -16, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to(".hero h1 .l:last-child", { xPercent: 6, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  // faixa acelera com a rolagem
+  const loop = gsap.fromTo("[data-faixa]", { xPercent: 0 }, { xPercent: -25, duration: 30, ease: "none", repeat: -1 });
+  ScrollTrigger.create({ onUpdate: s => { const v = 1 + Math.min(5, Math.abs(s.getVelocity()) / 300); gsap.to(loop, { timeScale: v, duration: .2, overwrite: true, onComplete: () => gsap.to(loop, { timeScale: 1, duration: 1 }) }); } });
+
+  // títulos entram de baixo
+  $$(".h2").forEach(h => gsap.from(h, { y: 60, opacity: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: h, start: "top 88%" } }));
+  gsap.from(".grupo", { y: 30, opacity: 0, duration: .8, stagger: .08, ease: "power3.out", scrollTrigger: { trigger: ".orc", start: "top 80%" } });
+  gsap.from(".resumo", { x: 40, opacity: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".orc", start: "top 80%" } });
+  ScrollTrigger.batch(".foto", { start: "top 92%", onEnter: b => gsap.from(b, { y: 60, opacity: 0, duration: .9, stagger: .08, ease: "expo.out" }) });
+  gsap.from(".estilo", { opacity: 0, x: -40, duration: .8, stagger: .07, ease: "power3.out", scrollTrigger: { trigger: ".estilos", start: "top 82%" } });
+  gsap.from(".carta", { y: 80, rotate: i => (i % 2 ? 4 : -4), opacity: 0, duration: 1, stagger: .06, ease: "expo.out", scrollTrigger: { trigger: ".flash__grade", start: "top 82%" } });
+  gsap.from(".artista", { y: 90, opacity: 0, duration: 1.1, stagger: .12, ease: "expo.out", scrollTrigger: { trigger: ".equipe", start: "top 82%" } });
+  gsap.to(".linha-tempo .agulha", { height: "calc(100% - 12px)", ease: "none", scrollTrigger: { trigger: ".linha-tempo", start: "top 75%", end: "bottom 55%", scrub: true } });
+  gsap.from(".linha-tempo li", { opacity: .2, duration: .5, stagger: .25, scrollTrigger: { trigger: ".linha-tempo", start: "top 75%", end: "bottom 55%", scrub: true } });
+  gsap.fromTo(".rodape__grande", { xPercent: 10 }, { xPercent: -8, ease: "none", scrollTrigger: { trigger: ".rodape", start: "top bottom", end: "bottom bottom", scrub: true } });
+  gsap.from(".flutua", { scale: 0, duration: .5, ease: "back.out(2)", scrollTrigger: { trigger: ".hero", start: "bottom 80%", toggleActions: "play none none reverse" } });
+
+  // estilos: prévia do desenho segue o cursor (computador)
+  const prev = $(".previa"), pimg = $("img", prev);
+  const px = gsap.quickTo(prev, "x", { duration: .45, ease: "power3" }), py = gsap.quickTo(prev, "y", { duration: .45, ease: "power3" });
+  $$(".estilo").forEach(r => {
+    r.addEventListener("pointerenter", () => { pimg.src = svgDe(r.dataset.d); gsap.to(prev, { opacity: 1, scale: 1, rotate: gsap.utils.random(-8, 8), duration: .35 }); });
+    r.addEventListener("pointerleave", () => gsap.to(prev, { opacity: 0, scale: .6, duration: .3 }));
+    r.addEventListener("pointermove", e => { px(e.clientX + 140); py(e.clientY); });
+  });
+
+  addEventListener("load", () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>

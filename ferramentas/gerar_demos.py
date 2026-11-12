@@ -900,6 +900,7 @@ COMPLETO = {
     "Pet": ("exemplo-pet", ["Simulador de preço pelo porte e pelo serviço", "Taxa de leva e traz calculada pelo bairro", "Plano mensal com a economia na tela", "Agendamento chega pronto no WhatsApp"]),
     "Salão": ("exemplo-beleza", ["Simulador com preço e duração do serviço", "Lembrete da próxima visita calculado sozinho", "Plano mensal com a economia na tela", "Agendamento chega pronto no WhatsApp"]),
     "Cílios": ("exemplo-beleza", ["Simulador com preço e duração do procedimento", "Data da próxima manutenção calculada sozinha", "Plano mensal com a economia na tela", "Agendamento chega pronto no WhatsApp"]),
+    "Tatuagem": ("exemplo-tatuagem", ["Orçamento na hora por estilo, tamanho, cor e lugar do corpo", "Flash day com desenhos prontos e reserva", "Galeria filtrada por artista", "Agendamento chega pronto no WhatsApp"]),
     "Confeitaria": ("exemplo-confeitaria", ["Montador de bolo com preço na hora", "Calculadora de docinhos por convidado", "Taxa de entrega calculada pelo bairro", "Pedido chega pronto no WhatsApp"]),
 }
 
