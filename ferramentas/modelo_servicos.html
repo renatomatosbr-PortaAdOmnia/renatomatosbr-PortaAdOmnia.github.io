@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--HEAD-->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/*CSS*/
+/* --- extras do modelo de serviços --- */
+.plano__linha{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.plano__linha select{border:1.5px solid var(--linha);border-radius:var(--raio-p);padding:10px 12px;background:var(--branco);font-weight:700;max-width:60%}
+.cuidados{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cuidado{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:20px}
+.cuidado b{display:block;font-size:16px;margin-bottom:6px}
+.cuidado span{font-size:14.5px;opacity:.78}
+@media (max-width:640px){.cuidados{grid-template-columns:1fr}}
+.campo--hora{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+<!--CORES-->
+</head>
+<body>
+
+<!-- =========================================================
+     CONFIGURAÇÃO — edite só este bloco (modelo de serviços da Porta Ad Omnia)
+     whatsapp vazio = modo demonstração (mostra a mensagem numa janela).
+     Preço do montador = (soma dos "soma") × (produto dos "mult") + soma dos "fixo".
+     ========================================================= -->
+<script>
+window.LOJA = /*CONFIG*/;
+</script>
+
+<div class="status"><div class="envolve">
+  <span class="status__aberto"><i class="status__ponto" data-status-ponto></i><span data-status-texto>Carregando horário…</span></span>
+  <span class="status__extra" data-status-extra></span>
+</div></div>
+
+<header class="topo"><div class="envolve">
+  <a class="marca" href="#inicio"><span class="marca__selo"><svg aria-hidden="true"><use data-icone href="#i-pata"/></svg></span><span class="marca__nome" data-marca></span></a>
+  <nav class="menu" aria-label="Principal" data-menu></nav>
+  <div class="topo__acoes">
+    <a class="botao botao--contorno botao--mini" href="#monte" data-txt="cta_topo"></a>
+    <button class="botao botao--primario botao--mini carrinho-botao" type="button" data-abre-pedido aria-label="Abrir seu agendamento"><svg aria-hidden="true"><use href="#i-sacola"/></svg><span>Agenda</span><span class="contador" data-contador hidden>0</span></button>
+  </div>
+</div></header>
+
+<main id="inicio">
+  <section class="hero"><div class="envolve">
+    <div>
+      <span class="hero__selo revela" data-hero-selo></span>
+      <h1 data-hero-titulo></h1>
+      <p class="hero__texto revela" data-txt="hero.texto"></p>
+      <div class="hero__cta revela">
+        <a class="botao botao--primario" href="#monte"><svg aria-hidden="true"><use href="#i-calc"/></svg><span data-txt="hero.cta1"></span></a>
+        <a class="botao botao--contorno" href="#servicos" data-txt="hero.cta2"></a>
+      </div>
+      <div class="provas" data-provas></div>
+    </div>
+    <div class="hero__fotos">
+      <div class="foto foto--a"><img data-foto-cfg="hero.fotoA" data-w="900" alt="" fetchpriority="high"></div>
+      <div class="foto foto--b"><img data-foto-cfg="hero.fotoB" data-w="500" alt=""></div>
+      <div class="cartao-flutua"><span class="cartao-flutua__icone"><svg aria-hidden="true"><use href="#i-check"/></svg></span><span><b data-txt="hero.flutua.titulo"></b><span data-txt="hero.flutua.texto"></span></span></div>
+      <svg class="selo-giro" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="circulo" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle cx="100" cy="100" r="96" fill="#fffdfa" stroke="#e8dccd" stroke-width="2"/>
+        <g class="selo-giro__txt"><text><textPath href="#circulo" data-txt="hero.giro"></textPath></text></g>
+        <use href="#i-coracao" x="72" y="72" width="56" height="56" style="color:var(--framboesa)"/>
+      </svg>
+    </div>
+  </div></section>
+
+  <section class="beneficios" aria-label="Diferenciais"><div class="envolve" data-beneficios></div></section>
+
+  <div class="envolve temporada" data-temporada-bloco>
+    <div class="temporada__caixa revela">
+      <div class="temporada__texto">
+        <p class="sobretitulo" data-txt="temporada.sobre"></p>
+        <h2 data-txt="temporada.titulo"></h2>
+        <div class="contagem" aria-live="polite"><div><b data-c="d">00</b><span>dias</span></div><div><b data-c="h">00</b><span>horas</span></div><div><b data-c="m">00</b><span>min</span></div></div>
+        <p data-txt="temporada.texto"></p>
+        <a class="botao botao--primario" href="#monte" data-txt="temporada.botao"></a>
+      </div>
+      <div class="temporada__foto"><img data-foto-cfg="temporada.foto" data-w="900" alt="" loading="lazy"></div>
+    </div>
+  </div>
+
+  <section class="secao" id="servicos"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo">Serviços</p><h2 class="titulo-secao" data-html="servicos.titulo"></h2></div><div class="filtros" role="tablist" data-filtros></div></div>
+    <div class="produtos" data-produtos></div>
+    <p class="foto-aviso" data-txt="servicos.aviso"></p>
+  </div></section>
+
+  <section class="secao montador" id="monte"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo" data-txt="montador.sobre"></p><h2 class="titulo-secao" data-html="montador.titulo"></h2><p class="intro" data-txt="montador.intro"></p></div></div>
+    <div class="montador__grade">
+      <form class="etapas" data-montador novalidate></form>
+      <aside class="resumo" aria-live="polite">
+        <p class="sobretitulo" style="margin-bottom:8px" data-txt="montador.resumo"></p>
+        <h3 data-r-titulo></h3>
+        <ul class="resumo__lista" data-r-lista></ul>
+        <div class="resumo__total"><span>Total estimado</span><b data-r-total>R$ 0</b></div>
+        <p class="resumo__nota" data-r-nota></p>
+        <div class="resumo__botoes">
+          <button class="botao botao--whats botao--bloco" type="button" data-enviar-monta><svg aria-hidden="true"><use href="#i-whats"/></svg><span data-txt="montador.botao"></span></button>
+          <button class="botao botao--contorno botao--bloco" type="button" data-add-monta>Adicionar à agenda e ver mais serviços</button>
+        </div>
+      </aside>
+    </div>
+  </div></section>
+
+  <section class="secao" id="plano"><div class="envolve calc">
+    <div>
+      <p class="sobretitulo" data-txt="plano.sobre"></p>
+      <h2 class="titulo-secao" data-html="plano.titulo"></h2>
+      <p class="intro" data-txt="plano.intro"></p>
+      <div class="calc__caixa revela" style="margin-top:28px">
+        <div class="plano__linha"><b>Serviço</b><select data-plano-servico aria-label="Serviço do plano"></select></div>
+        <div class="contador-pessoas"><span><b data-txt="plano.rotulo"></b><small>por mês</small></span>
+          <span class="qtd"><button type="button" data-plano-d="-1" aria-label="Menos">−</button><span data-plano-vezes>2</span><button type="button" data-plano-d="1" aria-label="Mais">+</button></span></div>
+        <div class="calc__resultado">
+          <div><b data-plano-avulso>R$ 0</b><span>avulso no mês</span></div>
+          <div><b data-plano-total>R$ 0</b><span>no plano mensal</span></div>
+          <div><b data-plano-eco>R$ 0</b><span>de economia</span></div>
+        </div>
+        <button class="botao botao--primario botao--bloco" type="button" data-plano-add style="margin-top:18px">Quero o plano mensal</button>
+      </div>
+    </div>
+    <div class="calc__foto revela"><img data-foto-cfg="plano.foto" data-w="900" alt="" loading="lazy"></div>
+  </div></section>
+
+  <section class="secao" style="padding-top:0"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo">Como funciona</p><h2 class="titulo-secao" data-html="passosTitulo"></h2></div></div>
+    <div class="passos" data-passos></div>
+    <div class="politicas" data-politicas></div>
+  </div></section>
+
+  <section class="secao entrega" id="info"><div class="envolve entrega__grade">
+    <div>
+      <p class="sobretitulo" data-txt="info.sobre"></p>
+      <h2 class="titulo-secao" style="color:var(--creme)" data-html="info.titulo"></h2>
+      <p class="intro" data-txt="info.intro"></p>
+      <div class="busca-bairro revela" data-busca-bloco>
+        <label for="busca-bairro">Seu bairro</label>
+        <input id="busca-bairro" list="lista-bairros" placeholder="Ex.: Cambuí" autocomplete="off">
+        <div class="busca-bairro__res" data-busca-res aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="zonas" data-zonas></div>
+    <datalist id="lista-bairros"></datalist>
+  </div></section>
+
+  <section class="secao"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo">Quem já veio</p><h2 class="titulo-secao">O que dizem <em>depois</em></h2></div></div>
+    <div class="depoimentos" data-depoimentos></div>
+    <p class="ficticio">Depoimentos fictícios, apenas para demonstração. No site do cliente entram as avaliações reais do Google.</p>
+  </div></section>
+
+  <section class="secao" id="duvidas" style="padding-top:0"><div class="envolve duvidas__grade">
+    <div><p class="sobretitulo">Dúvidas</p><h2 class="titulo-secao">Antes de você <em>perguntar</em></h2><p class="intro">As perguntas que mais chegam no WhatsApp, já respondidas.</p>
+      <a class="botao botao--contorno" href="#" data-whats-duvida style="margin-top:22px"><svg aria-hidden="true"><use href="#i-whats"/></svg>Outra dúvida? Fale com a gente</a></div>
+    <div data-faq></div>
+  </div></section>
+
+  <section class="secao" style="padding-top:0"><div class="envolve"><div class="local__grade">
+    <div class="local__caixa revela"><p class="sobretitulo">Horários</p><h2 class="titulo-secao" style="font-size:clamp(30px,3.4vw,42px)">Atendimento com hora marcada</h2><ul class="horarios" data-horarios></ul></div>
+    <div class="local__mapa revela">
+      <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-20 260 C120 220 200 300 320 250 S520 160 640 210" fill="none" stroke="#e8dccd" stroke-width="26"/><path d="M180 -20 C210 120 160 260 230 420" fill="none" stroke="#e8dccd" stroke-width="18"/><path d="M420 -20 L380 420" fill="none" stroke="#e8dccd" stroke-width="14"/><circle cx="470" cy="90" r="46" fill="#e7eedc"/><circle cx="110" cy="330" r="34" fill="#e7eedc"/></svg>
+      <div class="pino"><b data-txt="nome"></b><i></i></div>
+      <a class="botao botao--claro" href="https://www.google.com/maps/search/?api=1&query=Campinas%2C%20SP" target="_blank" rel="noopener">Abrir no Google Maps</a>
+    </div>
+  </div></div></section>
+
+  <section class="final"><div class="envolve"><div class="final__caixa revela">
+    <div><h2 data-txt="final.titulo"></h2><p data-txt="final.texto"></p></div>
+    <a class="botao botao--claro" href="#monte"><svg aria-hidden="true"><use href="#i-calc"/></svg><span data-txt="final.botao"></span></a>
+  </div></div></section>
+</main>
+
+<footer class="rodape"><div class="envolve">
+  <div class="rodape__grade">
+    <div><a class="marca" href="#inicio" style="margin-bottom:14px"><span class="marca__selo"><svg aria-hidden="true"><use data-icone href="#i-pata"/></svg></span><span class="marca__nome" data-txt="marcaCurta"></span></a><p style="margin:0;max-width:36ch" data-txt="rodape"></p></div>
+    <div><h4>Navegue</h4><ul data-rodape-menu></ul></div>
+    <div><h4>Contato</h4><ul><li><a href="#" data-whats-duvida>WhatsApp</a></li><li>Campinas · SP</li><li>Pix, crédito e débito</li></ul></div>
+  </div>
+  <div class="rodape__base"><span>Site de exemplo. Marca, preços e avaliações fictícios.</span><span>Site criado por <b>Porta Ad Omnia</b></span></div>
+</div></footer>
+
+<a class="selo-exemplo" href="#inicio"><i>i</i>Site de exemplo · Porta Ad Omnia</a>
+<div class="barra-pedido" data-barra><div><b data-barra-total>R$ 0</b><span data-barra-itens>0 itens</span></div><button class="botao botao--primario botao--mini" type="button" data-abre-pedido>Ver agenda</button></div>
+
+<div class="gaveta" data-gaveta role="dialog" aria-modal="true" aria-labelledby="titulo-pedido">
+  <div class="gaveta__fundo" data-fecha-pedido></div>
+  <div class="gaveta__painel">
+    <div class="gaveta__topo"><h2 id="titulo-pedido">Seu agendamento</h2><button class="fechar" type="button" data-fecha-pedido aria-label="Fechar">×</button></div>
+    <div class="gaveta__corpo">
+      <div data-itens></div>
+      <div class="gaveta__form" data-form-pedido>
+        <div class="campo"><label for="p-nome">Seu nome</label><input id="p-nome" autocomplete="name" placeholder="Como podemos te chamar?"></div>
+        <div class="campos">
+          <div class="campo"><label for="p-data">Dia</label><input id="p-data" type="date"></div>
+          <div class="campo"><label for="p-periodo">Período</label><select id="p-periodo" data-periodos></select></div>
+        </div>
+      </div>
+    </div>
+    <div class="gaveta__pe">
+      <div class="linha-total"><span>Subtotal</span><span data-g-sub>R$ 0</span></div>
+      <div class="linha-total" data-g-entrega-linha><span data-txt="entregaRotulo"></span><span data-g-entrega>—</span></div>
+      <div class="linha-total grande"><span>Total</span><b data-g-total>R$ 0</b></div>
+      <button class="botao botao--whats botao--bloco" type="button" data-enviar-pedido><svg aria-hidden="true"><use href="#i-whats"/></svg>Enviar no WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<div class="janela" data-janela role="dialog" aria-modal="true" aria-labelledby="titulo-janela">
+  <div class="janela__fundo" data-fecha-janela></div>
+  <div class="janela__caixa">
+    <h2 id="titulo-janela">Assim o pedido chega no WhatsApp</h2>
+    <p>Este é um site de exemplo. No site do seu negócio, este botão abre o WhatsApp com a mensagem abaixo já escrita: o cliente só aperta enviar.</p>
+    <div class="whats-previa"><div class="balao" data-balao></div></div>
+    <div class="janela__botoes"><button class="botao botao--contorno" type="button" data-copiar>Copiar mensagem</button><button class="botao botao--primario" type="button" data-fecha-janela>Entendi</button></div>
+  </div>
+</div>
+<div class="toast" data-toast role="status"><svg aria-hidden="true"><use href="#i-check"/></svg><span data-toast-txt></span></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pata" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="6.5" cy="10" rx="2" ry="2.6"/><ellipse cx="10" cy="6.2" rx="2" ry="2.6"/><ellipse cx="14" cy="6.2" rx="2" ry="2.6"/><ellipse cx="17.5" cy="10" rx="2" ry="2.6"/><path d="M12 11.5c-3 0-6 3.6-6 6.2 0 1.6 1.3 2.4 2.8 2.4 1.3 0 2-.6 3.2-.6s1.9.6 3.2.6c1.5 0 2.8-.8 2.8-2.4 0-2.6-3-6.2-6-6.2z"/></g></symbol>
+  <symbol id="i-olho" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2.5 12.5c2.5-3.6 5.7-5.4 9.5-5.4s7 1.8 9.5 5.4"/><path d="M5 9.6 3.6 7.8M8.4 7.8 7.6 5.7M12 7.1V4.9M15.6 7.8l.8-2.1M19 9.6l1.4-1.8"/><circle cx="12" cy="13" r="3"/></g></symbol>
+  <symbol id="i-sacola" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/></g></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h6l-2-6h-3M14 7h3l3 10M5 11h5"/></g></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></g></symbol>
+  <symbol id="i-pix" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9 9-9z"/><path d="M8 12l2.5-2.5a2 2 0 0 1 3 0L16 12l-2.5 2.5a2 2 0 0 1-3 0L8 12z"/></g></symbol>
+  <symbol id="i-folha" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10 10 5 20 4c0 10-5 15-14 15"/><path d="M5 19c3-4 6-7 10-9"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></g></symbol>
+  <symbol id="i-pessoas" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.8-3.2 3-5 5.5-5s4.7 1.8 5.5 5M16 5.5a3 3 0 0 1 0 5.6M17.5 14c1.6.6 2.7 2.2 3 5"/></g></symbol>
+  <symbol id="i-relogio" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="i-coracao" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4h2c.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></symbol>
+  <!--WHATS-->
+</svg>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  const L = window.LOJA;
+  const $ = (s, el=document) => el.querySelector(s);
+  const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const temGSAP = typeof window.gsap !== "undefined";
+  const real = v => v.toLocaleString("pt-BR", { style:"currency", currency:"BRL", minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  const foto = (id, w) => `https://images.unsplash.com/photo-${id}?w=${w}&q=72&fm=jpg&auto=format&fit=crop`;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const norm = s => String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().trim();
+  const pega = caminho => caminho.split(".").reduce((o,k) => o == null ? o : o[k], L);
+  const guarda = { ler(k,p){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : p; } catch(e){ return p; } }, gravar(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+  const minTxt = m => m >= 60 ? `${Math.floor(m/60)}h${m%60 ? String(m%60).padStart(2,"0") : ""}` : `${m} min`;
+
+  /* ---------- textos e fotos vindos da configuração ---------- */
+  $$("[data-txt]").forEach(el => { const v = pega(el.dataset.txt); if (v != null) el.textContent = v; });
+  $$("[data-html]").forEach(el => { const v = pega(el.dataset.html); if (v != null) el.innerHTML = v; });
+  $$("[data-foto-cfg]").forEach(img => { const f = pega(img.dataset.fotoCfg); if (f){ img.src = foto(f.id, img.dataset.w); img.alt = f.alt || ""; } });
+  $$("[data-icone]").forEach(u => u.setAttribute("href", "#" + L.icone));
+  $("[data-marca]").innerHTML = `${esc(L.marcaCurta)}<small>${esc(L.marcaSub)}</small>`;
+  $("[data-status-extra]").textContent = L.statusExtra;
+  const MENU = [["#servicos","Serviços"],["#monte",L.montador.menu],["#plano","Plano mensal"],["#info",L.info.menu],["#duvidas","Dúvidas"]];
+  $("[data-menu]").innerHTML = MENU.map(([h,t]) => `<a href="${h}">${t}</a>`).join("");
+  $("[data-rodape-menu]").innerHTML = MENU.slice(0,4).map(([h,t]) => `<li><a href="${h}">${t}</a></li>`).join("");
+  $("[data-hero-selo]").innerHTML = `<b>${esc(L.hero.selo[0])}</b> ${esc(L.hero.selo[1])}`;
+  $("[data-hero-titulo]").innerHTML = L.hero.titulo.map(l => `<span class="linha"><span>${l}</span></span>`).join("");
+  $("[data-provas]").innerHTML = L.hero.provas.map(([v,t,est]) => `<div class="prova revela"><b>${v}</b><span>${est ? '<span class="estrelas">★★★★★</span> ' : ""}${t}</span></div>`).join("");
+  $("[data-beneficios]").innerHTML = L.beneficios.map(([ic,t,s]) => `<div class="beneficio revela"><span class="beneficio__icone"><svg aria-hidden="true"><use href="#${ic}"/></svg></span><span><b>${t}</b><span>${s}</span></span></div>`).join("");
+  $("[data-passos]").innerHTML = L.passos.map(([t,s]) => `<div class="passo revela"><h3>${t}</h3><p>${s}</p></div>`).join("");
+  $("[data-politicas]").innerHTML = L.politicas.map(([t,s]) => `<div class="politica revela"><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>${t}</b><span>${s}</span></span></div>`).join("");
+  const cores = ["var(--framboesa)","var(--pistache)","var(--ouro)"];
+  $("[data-depoimentos]").innerHTML = L.depoimentos.map(([txt,nome,ctx],i) => `<figure class="depoimento revela" style="margin:0"><span class="estrelas">★★★★★</span><p>“${txt}”</p><footer><span class="avatar" style="background:${cores[i%3]}">${nome[0]}</span><span><b>${nome}</b><span>${ctx}</span></span></footer></figure>`).join("");
+  $("[data-faq]").innerHTML = L.faq.map(([p,r],i) => `<details class="pergunta"${i === 0 ? " open" : ""}><summary>${p}<i aria-hidden="true">+</i></summary><div class="pergunta__resposta">${r}</div></details>`).join("");
+  $("[data-periodos]").innerHTML = L.periodos.map(p => `<option>${p}</option>`).join("");
+
+  /* ---------- horário de Campinas ---------- */
+  const DIAS = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  function agoraSP(){
+    const p = new Intl.DateTimeFormat("en-US", { timeZone:"America/Sao_Paulo", weekday:"short", hour:"numeric", minute:"numeric", hour12:false }).formatToParts(new Date());
+    const g = t => (p.find(x => x.type === t) || {}).value;
+    return { dia: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(g("weekday")), hora: (Number(g("hour")) % 24) + Number(g("minute"))/60 };
+  }
+  function status(){
+    const { dia, hora } = agoraSP(), h = L.horarios[dia], ponto = $("[data-status-ponto]"), txt = $("[data-status-texto]");
+    if (h && hora >= h[0] && hora < h[1]){ ponto.classList.remove("fechado"); txt.textContent = `Aberto agora · atendimento até as ${h[1]}h`; return; }
+    ponto.classList.add("fechado");
+    for (let k = 0; k < 8; k++){ const d = (dia+k)%7, hh = L.horarios[d]; if (!hh) continue;
+      if (k === 0 && hora < hh[0]){ txt.textContent = `Fechado agora · abre hoje às ${hh[0]}h`; return; }
+      if (k > 0){ txt.textContent = `Fechado agora · abre ${k === 1 ? "amanhã" : DIAS[d].toLowerCase()} às ${hh[0]}h`; return; } }
+  }
+  status(); setInterval(status, 60000);
+  const hoje = agoraSP().dia;
+  $("[data-horarios]").innerHTML = [1,2,3,4,5,6,0].map(d => { const h = L.horarios[d]; return `<li class="${d === hoje ? "hoje" : ""}"><span>${DIAS[d]}</span><span>${h ? `${h[0]}h às ${h[1]}h` : "Fechado"}</span></li>`; }).join("");
+  const diaAberto = iso => !!L.horarios[new Date(iso + "T12:00:00").getDay()];
+
+  /* ---------- temporada ---------- */
+  if (!L.temporada) $("[data-temporada-bloco]").remove();
+  else {
+    const fim = new Date(L.temporada.prazo).getTime();
+    const conta = () => { let r = Math.max(0, fim - Date.now()); const d = Math.floor(r/864e5); r -= d*864e5; const h = Math.floor(r/36e5); r -= h*36e5;
+      $("[data-c=d]").textContent = String(d).padStart(2,"0"); $("[data-c=h]").textContent = String(h).padStart(2,"0"); $("[data-c=m]").textContent = String(Math.floor(r/6e4)).padStart(2,"0"); };
+    conta(); setInterval(conta, 30000);
+  }
+
+  /* ---------- seção informativa: zonas (leva e traz) ou cuidados ---------- */
+  const zonaDe = b => { const n = norm(b); if (!n || !L.zonas) return null; return L.zonas.find(z => z.bairros.some(x => norm(x) === n)) || null; };
+  if (L.zonas){
+    $("#lista-bairros").innerHTML = L.zonas.flatMap(z => z.bairros).sort((a,b)=>a.localeCompare(b,"pt-BR")).map(b => `<option value="${esc(b)}">`).join("");
+    $("[data-zonas]").innerHTML = L.zonas.map((z,i) => `<div class="zona revela" data-zona="${i}"><i class="zona__cor" style="background:${z.cor}"></i><span><b>${z.nome}</b><span>${z.bairros.slice(0,6).join(", ")} e outros</span></span><span class="zona__preco">${real(z.preco)}</span></div>`).join("")
+      + `<div class="zona revela"><i class="zona__cor" style="background:rgba(255,255,255,.4)"></i><span><b>${L.info.semTaxa[0]}</b><span>${L.info.semTaxa[1]}</span></span><span class="zona__preco">Grátis</span></div>`;
+    const busca = $("#busca-bairro"), res = $("[data-busca-res]"); res.textContent = L.info.padrao;
+    busca.addEventListener("input", () => {
+      const z = zonaDe(busca.value);
+      $$("[data-zona]").forEach(el => el.classList.toggle("destaque", !!z && L.zonas.indexOf(z) === Number(el.dataset.zona)));
+      if (!busca.value.trim()){ res.textContent = L.info.padrao; return; }
+      res.innerHTML = z ? `${esc(L.info.rotuloTaxa)} em ${esc(busca.value.trim())}: <b>${real(z.preco)}</b>` : "Não achamos esse bairro na lista. Mande no agendamento que confirmamos a taxa.";
+    });
+  } else {
+    $("[data-busca-bloco]").remove();
+    $("[data-zonas]").className = "cuidados";
+    $("[data-zonas]").innerHTML = L.info.itens.map(([t,s]) => `<div class="cuidado revela"><b>${t}</b><span>${s}</span></div>`).join("");
+  }
+
+  /* ---------- agenda (carrinho) ---------- */
+  const chaveLS = "pao-" + norm(L.marcaCurta).replace(/\W+/g,"-");
+  let pedido = guarda.ler(chaveLS, []);
+  const salvar = () => guarda.gravar(chaveLS, pedido);
+  const subtotal = () => pedido.reduce((s,i) => s + i.preco * i.qtd, 0);
+  const qtdTotal = () => pedido.reduce((s,i) => s + i.qtd, 0);
+  let entregaAgenda = { valor:0, txt:"—" };
+  function adicionar(item){
+    const ex = pedido.find(i => i.chave === item.chave);
+    if (ex) ex.qtd += 1; else pedido.push({ qtd:1, ...item });
+    salvar(); desenharPedido(); desenharServicos(); avisar(`${item.nome} na agenda`);
+    if (temGSAP && !reduz) gsap.fromTo(".carrinho-botao", { scale:1 }, { scale:1.12, duration:.18, yoyo:true, repeat:1 });
+  }
+  function mudarQtd(chave, d){ const it = pedido.find(i => i.chave === chave); if (!it) return; it.qtd += d; if (it.qtd <= 0) pedido = pedido.filter(i => i.chave !== chave); salvar(); desenharPedido(); desenharServicos(); }
+  function desenharPedido(){
+    const n = qtdTotal(), sub = subtotal();
+    const c = $("[data-contador]"); c.textContent = n; c.hidden = n === 0;
+    $("[data-barra]").classList.toggle("tem", n > 0);
+    $("[data-barra-total]").textContent = real(sub + entregaAgenda.valor);
+    $("[data-barra-itens]").textContent = `${n} ${n === 1 ? "serviço" : "serviços"} na agenda`;
+    $("[data-itens]").innerHTML = pedido.length ? pedido.map(i => `
+      <div class="item">${i.foto ? `<img src="${foto(i.foto,160)}" alt="">` : `<span class="item__ico"><svg width="28" height="28"><use href="#${L.icone}"/></svg></span>`}
+        <div><b>${esc(i.nome)}</b><small>${esc(i.detalhe || "")}</small><button class="item__remover" type="button" data-remover="${esc(i.chave)}">Remover</button></div>
+        <div class="item__preco">${real(i.preco*i.qtd)}${i.unico ? "" : `<div><span class="qtd"><button type="button" data-q="${esc(i.chave)}" data-d="-1" aria-label="Menos">−</button><span>${i.qtd}</span><button type="button" data-q="${esc(i.chave)}" data-d="1" aria-label="Mais">+</button></span></div>`}</div>
+      </div>`).join("") : `<div class="vazio"><svg><use href="#i-sacola"/></svg><b>Sua agenda está vazia</b><br>Escolha um serviço ou monte o atendimento.</div>`;
+    $("[data-form-pedido]").hidden = !pedido.length;
+    $("[data-g-sub]").textContent = real(sub);
+    $("[data-g-entrega-linha]").hidden = !L.zonas;
+    $("[data-g-entrega]").textContent = entregaAgenda.txt;
+    $("[data-g-total]").textContent = real(sub + entregaAgenda.valor);
+    $("[data-enviar-pedido]").disabled = !pedido.length;
+  }
+  $("[data-itens]").addEventListener("click", ev => {
+    const q = ev.target.closest("[data-q]"); if (q) return mudarQtd(q.dataset.q, Number(q.dataset.d));
+    const r = ev.target.closest("[data-remover]"); if (r){ pedido = pedido.filter(i => i.chave !== r.dataset.remover); salvar(); desenharPedido(); desenharServicos(); }
+  });
+  const gaveta = $("[data-gaveta]"); let lenis = null;
+  const abrirPedido = () => { gaveta.classList.add("aberta"); lenis && lenis.stop(); setTimeout(() => $(".gaveta .fechar").focus(), 50); };
+  const fecharPedido = () => { gaveta.classList.remove("aberta"); lenis && lenis.start(); };
+  $$("[data-abre-pedido]").forEach(b => b.addEventListener("click", abrirPedido));
+  $$("[data-fecha-pedido]").forEach(b => b.addEventListener("click", fecharPedido));
+  let tToast; function avisar(t){ const el = $("[data-toast]"); $("[data-toast-txt]").textContent = t; el.classList.add("mostra"); clearTimeout(tToast); tToast = setTimeout(() => el.classList.remove("mostra"), 2200); }
+
+  /* ---------- WhatsApp ou demonstração ---------- */
+  const janela = $("[data-janela]"); let ultimaMsg = "";
+  function enviarWhats(msg){
+    ultimaMsg = msg;
+    if (L.whatsapp){ window.open(`https://wa.me/${L.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank", "noopener"); return; }
+    $("[data-balao]").innerHTML = esc(msg).replace(/\*(.+?)\*/g, "<b>$1</b>") + `<small>${new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})} ✓✓</small>`;
+    janela.classList.add("aberta"); lenis && lenis.stop();
+  }
+  $$("[data-fecha-janela]").forEach(b => b.addEventListener("click", () => { janela.classList.remove("aberta"); if (!gaveta.classList.contains("aberta")) lenis && lenis.start(); }));
+  $("[data-copiar]").addEventListener("click", () => { navigator.clipboard && navigator.clipboard.writeText(ultimaMsg).then(() => avisar("Mensagem copiada"), () => {}); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape"){ janela.classList.remove("aberta"); fecharPedido(); } });
+  $$("[data-whats-duvida]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); enviarWhats(`Olá, ${L.nome}! Vi o site e tenho uma dúvida:`); }));
+  const dataBR = v => v ? new Date(v + "T12:00:00").toLocaleDateString("pt-BR", { weekday:"long", day:"2-digit", month:"2-digit" }) : "a combinar";
+  const limpa = linhas => linhas.filter((l,i,a) => !(l === "" && (a[i-1] === "" || i === a.length-1))).join("\n");
+  $("[data-enviar-pedido]").addEventListener("click", () => {
+    const nome = $("#p-nome").value.trim();
+    enviarWhats(limpa([
+      `Olá, ${L.nome}! Quero agendar pelo site.`, "", "*Serviços*",
+      ...pedido.map(i => `• ${i.qtd > 1 ? i.qtd + "× " : ""}${i.nome}${i.detalhe ? ` (${i.detalhe})` : ""}: ${real(i.preco*i.qtd)}`), "",
+      L.zonas && entregaAgenda.valor ? `${L.entregaRotulo}: ${entregaAgenda.txt}` : "",
+      `*Total estimado: ${real(subtotal() + entregaAgenda.valor)}*`,
+      `Dia: ${dataBR($("#p-data").value)} · ${$("#p-periodo").value}`,
+      nome ? `Nome: ${nome}` : ""
+    ]));
+  });
+
+  /* ---------- serviços ---------- */
+  let filtro = "todos";
+  $("[data-filtros]").innerHTML = Object.entries(L.servicos.categorias).map(([k,v]) => `<button class="filtro${k === filtro ? " ativo" : ""}" role="tab" type="button" data-filtro="${k}">${v}</button>`).join("");
+  $("[data-filtros]").addEventListener("click", e => { const b = e.target.closest("[data-filtro]"); if (!b) return; filtro = b.dataset.filtro; $$("[data-filtro]").forEach(x => x.classList.toggle("ativo", x === b)); desenharServicos(true); });
+  function desenharServicos(anima){
+    $("[data-produtos]").innerHTML = L.servicos.itens.filter(p => filtro === "todos" || p.cat === filtro).map(p => {
+      const np = pedido.find(i => i.chave === p.id);
+      const acao = p.monta ? `<button class="botao botao--primario botao--mini" type="button" data-montar="${p.id}">Personalizar</button>`
+        : np ? `<span class="qtd"><button type="button" data-pq="${p.id}" data-d="-1" aria-label="Menos">−</button><span>${np.qtd}</span><button type="button" data-pq="${p.id}" data-d="1" aria-label="Mais">+</button></span>`
+        : `<button class="botao botao--primario botao--mini" type="button" data-add="${p.id}">Agendar</button>`;
+      return `<article class="produto"><div class="produto__foto"><img src="${foto(p.foto,640)}" alt="${esc(p.nome)}" loading="lazy">${p.etiqueta ? `<span class="etiqueta">${p.etiqueta}</span>` : ""}</div>
+        <div class="produto__corpo"><h3>${esc(p.nome)}</h3><p>${esc(p.desc)}</p>
+        <div class="produto__info"><span><svg><use href="#i-relogio"/></svg>${p.info1}</span><span><svg><use href="#i-check"/></svg>${p.info2}</span></div>
+        <div class="produto__pe"><span class="preco"><small>${p.unid}</small><b>${real(p.preco)}</b></span>${acao}</div></div></article>`;
+    }).join("");
+    if (anima && temGSAP && !reduz) gsap.from(".produto", { y:24, opacity:0, duration:.5, stagger:.05, ease:"power3.out" });
+  }
+  $("[data-produtos]").addEventListener("click", e => {
+    const a = e.target.closest("[data-add]"); if (a){ const p = L.servicos.itens.find(x => x.id === a.dataset.add); return adicionar({ chave:p.id, nome:p.nome, preco:p.preco, foto:p.foto, detalhe:p.unid }); }
+    const q = e.target.closest("[data-pq]"); if (q) return mudarQtd(q.dataset.pq, Number(q.dataset.d));
+    const m = e.target.closest("[data-montar]"); if (m){ aplicarModelo(L.servicos.itens.find(x => x.id === m.dataset.montar)); irPara("#monte"); }
+  });
+  function irPara(alvo){ if (lenis) lenis.scrollTo(alvo, { offset:-80 }); else document.querySelector(alvo).scrollIntoView({ behavior: reduz ? "auto" : "smooth" }); }
+
+  /* ---------- montador ---------- */
+  const M = L.montador, form = $("[data-montador]");
+  const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const amanha = new Date(); amanha.setDate(amanha.getDate() + 1);
+  const extraTxt = o => [o.soma && M.mostrarSoma ? real(o.soma) : "", o.fixo ? "+" + real(o.fixo) : "", o.mult && o.mult !== 1 ? (o.mult > 1 ? "+" : "") + Math.round((o.mult-1)*100) + "%" : ""].filter(Boolean).join(" ");
+  form.innerHTML = M.grupos.map((g,gi) => `
+    <div class="etapa revela"><div class="etapa__topo"><span class="etapa__num">${gi+1}</span><h3>${g.titulo}</h3>${g.dica ? `<span class="etapa__dica">${g.dica}</span>` : ""}</div>
+      <div class="opcoes">${g.opcoes.map((o,oi) => `<label class="opcao"><input type="${g.tipo}" name="${g.id}" value="${oi}"${g.tipo === "radio" && oi === (g.padrao||0) ? " checked" : ""}><span>${esc(o.nome)}${extraTxt(o) ? ` <small>${extraTxt(o)}</small>` : ""}</span></label>`).join("")}</div>
+    </div>`).join("") + `
+    <div class="etapa revela"><div class="etapa__topo"><span class="etapa__num">${M.grupos.length+1}</span><h3>Dia e horário</h3></div>
+      <div class="campos">
+        <div class="campo"><label for="m-data">Dia</label><input type="date" id="m-data" name="data" min="${iso(amanha)}"></div>
+        <div class="campo"><label for="m-periodo">Período</label><select id="m-periodo" name="periodo">${L.periodos.map(p => `<option>${p}</option>`).join("")}</select></div>
+        ${L.zonas ? `<div class="campo"><label for="m-modo">${L.leva.rotulo}</label><select id="m-modo" name="modo"><option value="leva">${L.leva.sim}</option><option value="nao">${L.leva.nao}</option></select></div>
+        <div class="campo" data-campo-bairro><label for="m-bairro">Bairro</label><input id="m-bairro" name="bairro" list="lista-bairros" placeholder="Ex.: Cambuí" autocomplete="off"></div>` : ""}
+        <div class="campo campo--inteiro"><label for="m-obs">${M.obsRotulo}</label><input id="m-obs" name="obs" placeholder="${esc(M.obsDica)}"></div>
+      </div>
+      <div data-alerta-data></div>
+    </div>`;
+  $$("input[type=date]").forEach(i => i.min = iso(amanha));
+  const lerMontador = () => {
+    const fd = new FormData(form);
+    const esc_ = M.grupos.map(g => ({ g, ops: fd.getAll(g.id).map(i => g.opcoes[Number(i)]) }));
+    const todas = esc_.flatMap(x => x.ops);
+    const soma = todas.reduce((s,o) => s + (o.soma||0), 0), mult = todas.reduce((s,o) => s * (o.mult||1), 1), fixo = todas.reduce((s,o) => s + (o.fixo||0), 0);
+    const minutos = todas.reduce((s,o) => s + (o.min||0), 0);
+    const manut = todas.map(o => o.manut).find(Boolean);
+    const leva = L.zonas && fd.get("modo") === "leva", bairro = (fd.get("bairro")||"").trim(), zona = leva ? zonaDe(bairro) : null;
+    const servico = Math.round(soma * mult + fixo);
+    const taxa = zona ? zona.preco : 0;
+    const principal = esc_[M.principal].ops[0];
+    return { esc_, servico, taxa, total: servico + taxa, minutos, manut, leva, bairro, zona, principal, data: fd.get("data"), periodo: fd.get("periodo"), obs: (fd.get("obs")||"").trim(), vazio: M.grupos.some(g => g.obrigatorio && !fd.getAll(g.id).length) };
+  };
+  let ultimoTotal = 0;
+  function desenharResumo(){
+    const r = lerMontador();
+    $("[data-r-titulo]").textContent = r.principal ? r.principal.nome : M.resumo;
+    const linhas = r.esc_.filter((x,i) => i !== M.principal).map(x => [x.g.curto || x.g.titulo, x.ops.length ? x.ops.map(o => o.nome).join(" + ") : "—"]);
+    if (r.minutos) linhas.push(["Duração", `cerca de ${minTxt(r.minutos)}`]);
+    if (r.manut && r.data){ const d = new Date(r.data + "T12:00:00"); d.setDate(d.getDate() + r.manut); linhas.push(["Próxima manutenção", d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})]); }
+    if (L.zonas) linhas.push([L.entregaRotulo, !r.leva ? "Não precisa" : r.zona ? `${esc(r.bairro)} · ${real(r.taxa)}` : r.bairro ? "A confirmar" : "Informe o bairro"]);
+    $("[data-r-lista]").innerHTML = linhas.map(([a,b]) => `<li><span>${a}</span><span>${b}</span></li>`).join("");
+    const el = $("[data-r-total]");
+    if (temGSAP && !reduz && ultimoTotal){ const o = { v: ultimoTotal }; gsap.to(o, { v: r.total, duration:.45, onUpdate:() => el.textContent = real(Math.round(o.v)) }); } else el.textContent = real(r.total);
+    ultimoTotal = r.total;
+    $("[data-r-nota]").textContent = r.data ? `Para ${dataBR(r.data)}, ${r.periodo.toLowerCase()}. ${M.nota}` : `Escolha o dia para reservar. ${M.nota}`;
+    const cb = $("[data-campo-bairro]"); if (cb) cb.hidden = !r.leva;
+    M.grupos.forEach(g => { if (g.tipo === "checkbox" && g.max){ const n = $$(`input[name="${g.id}"]:checked`, form).length; $$(`input[name="${g.id}"]`, form).forEach(i => i.disabled = !i.checked && n >= g.max); } });
+    const al = $("[data-alerta-data]");
+    al.innerHTML = !r.data ? "" : !diaAberto(r.data) ? `<div class="alerta alerta--aviso">Não atendemos às ${DIAS[new Date(r.data + "T12:00:00").getDay()].toLowerCase()}s. Escolha outro dia.</div>` : `<div class="alerta alerta--ok">Dia com atendimento. Confirmamos o horário no WhatsApp.</div>`;
+    $("[data-enviar-monta]").disabled = r.vazio; $("[data-add-monta]").disabled = r.vazio;
+  }
+  form.addEventListener("input", desenharResumo); form.addEventListener("change", desenharResumo);
+  function aplicarModelo(p){
+    Object.entries(p.monta).forEach(([gid, vals]) => { const g = M.grupos.find(x => x.id === gid); $$(`input[name="${gid}"]`, form).forEach(i => { i.checked = [].concat(vals).includes(g.opcoes[Number(i.value)].nome); i.disabled = false; }); });
+    desenharResumo(); avisar(`${p.nome}: ajuste os detalhes e o dia`);
+  }
+  const textoMonta = (r, semPrincipal) => r.esc_.map((x,i) => x.ops.length && !(semPrincipal && i === M.principal) ? `${x.g.curto || x.g.titulo}: ${x.ops.map(o => o.nome).join(" + ")}` : "").filter(Boolean);
+  $("[data-enviar-monta]").addEventListener("click", () => {
+    const r = lerMontador();
+    enviarWhats(limpa([
+      `Olá, ${L.nome}! Montei o atendimento no site e quero agendar.`, "",
+      ...textoMonta(r).map(t => "• " + t),
+      r.minutos ? `Duração: cerca de ${minTxt(r.minutos)}` : "",
+      `Dia: ${dataBR(r.data)} · ${r.periodo}`,
+      L.zonas ? (r.leva ? `${L.entregaRotulo} em ${r.bairro || "(bairro a informar)"}${r.zona ? `: ${real(r.taxa)}` : ""}` : L.leva.nao) : "",
+      r.obs ? `${M.obsRotulo}: ${r.obs}` : "", "",
+      `*Total estimado: ${real(r.total)}*`
+    ]));
+  });
+  $("[data-add-monta]").addEventListener("click", () => {
+    const r = lerMontador();
+    adicionar({ chave:"monta-" + Date.now(), nome: r.principal ? r.principal.nome : "Atendimento", detalhe: textoMonta(r, true).join(" · "), preco: r.servico, unico:true });
+    if (r.data) $("#p-data").value = r.data; $("#p-periodo").value = r.periodo;
+    if (L.zonas) entregaAgenda = r.leva ? (r.zona ? { valor:r.taxa, txt:real(r.taxa) } : { valor:0, txt:"A confirmar" }) : { valor:0, txt:L.leva.nao };
+    desenharPedido(); irPara("#plano");
+  });
+
+  /* ---------- plano mensal ---------- */
+  const P = L.plano; let vezes = P.padrao;
+  $("[data-plano-servico]").innerHTML = P.opcoes.map(([n,p],i) => `<option value="${i}">${esc(n)} · ${real(p)}</option>`).join("");
+  const lerPlano = () => { const [nome, preco] = P.opcoes[Number($("[data-plano-servico]").value)]; const avulso = preco * vezes, total = Math.round(avulso * (1 - P.desconto)); return { nome, preco, avulso, total, eco: avulso - total }; };
+  function desenharPlano(){ const p = lerPlano(); $("[data-plano-vezes]").textContent = vezes; $("[data-plano-avulso]").textContent = real(p.avulso); $("[data-plano-total]").textContent = real(p.total); $("[data-plano-eco]").textContent = real(p.eco); }
+  $("[data-plano-servico]").addEventListener("change", desenharPlano);
+  $$("[data-plano-d]").forEach(b => b.addEventListener("click", () => { vezes = Math.max(1, Math.min(P.max, vezes + Number(b.dataset.planoD))); desenharPlano(); }));
+  $("[data-plano-add]").addEventListener("click", () => { const p = lerPlano(); adicionar({ chave:"plano", nome:`Plano mensal: ${p.nome}`, detalhe:`${vezes}× por mês · ${Math.round(P.desconto*100)}% de desconto`, preco:p.total, unico:true }); abrirPedido(); });
+
+  /* selo some no rodapé; topo */
+  if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => $(".selo-exemplo").classList.toggle("some", e.isIntersecting)).observe($(".rodape"));
+  const topo = $(".topo"); const marcaTopo = () => topo.classList.toggle("rolou", scrollY > 30);
+  addEventListener("scroll", marcaTopo, { passive:true }); marcaTopo();
+
+  desenharServicos(); desenharResumo(); desenharPlano(); desenharPedido();
+  if (!temGSAP || reduz) return;
+
+  /* ---------- animações discretas ---------- */
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.Lenis){
+    lenis = new Lenis({ lerp:.11, smoothWheel:true }); lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+    $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => { const alvo = a.getAttribute("href"); if (alvo.length < 2) return; e.preventDefault(); lenis.scrollTo(alvo, { offset:-80 }); }));
+  }
+  gsap.timeline({ defaults:{ ease:"expo.out" } })
+    .from(".hero h1 .linha > span", { yPercent:110, duration:1.1, stagger:.08 })
+    .from(".hero .revela", { y:20, opacity:0, duration:.9, stagger:.07 }, "-=.8")
+    .from(".foto--a", { clipPath:"inset(100% 0 0 0 round 20px)", duration:1.3 }, .1)
+    .from(".foto--b", { scale:.6, opacity:0, duration:1 }, .5)
+    .from(".cartao-flutua", { x:-30, opacity:0, duration:.9 }, .8)
+    .from(".selo-giro", { scale:0, rotate:-90, duration:1, ease:"back.out(1.6)" }, .7);
+  gsap.to(".selo-giro__txt", { rotate:360, transformOrigin:"100px 100px", duration:20, ease:"none", repeat:-1 });
+  gsap.to(".foto--a img", { yPercent:8, scale:1.08, ease:"none", scrollTrigger:{ trigger:".hero", start:"top top", end:"bottom top", scrub:true } });
+  gsap.to(".cartao-flutua", { y:-10, duration:2.4, ease:"sine.inOut", repeat:-1, yoyo:true });
+  $$(".revela").forEach(el => { if (el.closest(".hero")) return; gsap.from(el, { y:36, opacity:0, duration:.9, ease:"power3.out", scrollTrigger:{ trigger:el, start:"top 90%", once:true } }); });
+  if (innerWidth > 640) ScrollTrigger.batch(".produto", { start:"top 92%", once:true, onEnter: b => gsap.from(b, { y:40, opacity:0, duration:.8, stagger:.07, ease:"power3.out" }) });
+  $$(".titulo-secao").forEach(t => gsap.from(t, { y:30, opacity:0, duration:1, ease:"expo.out", scrollTrigger:{ trigger:t, start:"top 88%", once:true } }));
+  addEventListener("load", () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>

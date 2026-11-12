@@ -692,6 +692,37 @@ def pagina_index(n):
 """
 
 
+COMPLETO = {
+    "Pet": ("exemplo-pet", ["Simulador de preço pelo porte e pelo serviço", "Taxa de leva e traz calculada pelo bairro", "Plano mensal com a economia na tela", "Agendamento chega pronto no WhatsApp"]),
+    "Cílios": ("exemplo-beleza", ["Simulador com preço e duração do procedimento", "Data da próxima manutenção calculada sozinha", "Plano mensal com a economia na tela", "Agendamento chega pronto no WhatsApp"]),
+    "Confeitaria": ("exemplo-confeitaria", ["Montador de bolo com preço na hora", "Calculadora de docinhos por convidado", "Taxa de entrega calculada pelo bairro", "Pedido chega pronto no WhatsApp"]),
+}
+
+
+def secao_planos(n):
+    if n.get("nicho") not in COMPLETO:
+        return ""
+    pasta, extras = COMPLETO[n["nicho"]]
+    modelo = f"{BASE_URL}/{pasta}/"
+    def plano(rotulo, titulo, preco, nota, itens, rec, botao=""):
+        borda = "border:3px solid var(--primary);" if rec else ""
+        selo = '<span style="position:absolute;top:-14px;right:22px;background:var(--primary);color:#fff;border-radius:999px;padding:5px 14px;font-size:12px;font-weight:800">Mais completo</span>' if rec else ""
+        li = "".join(f"<li>{e(i)}</li>" for i in itens)
+        return f"""<article class="card reveal" style="position:relative;overflow:visible;{borda}"><div style="padding:30px 26px">{selo}
+<div class="eyebrow">{e(rotulo)}</div><h2 style="font-size:32px;margin:6px 0 10px">{e(titulo)}</h2>
+<div style="font-size:40px;font-weight:800;color:var(--fg)">{e(preco)}</div><small style="color:var(--muted)">{e(nota)}</small>
+<ul style="margin:16px 0 0;padding-left:20px;color:var(--muted)">{li}</ul>{botao}</div></article>"""
+    p1 = plano("Para começar", "Site", "R$ 397", "50% de entrada no Pix e 50% com o site no ar · manutenção opcional R$ 100/mês",
+               ["Este site que você viu, com as suas fotos e textos", "Botão de WhatsApp com mensagem pronta", "Mapa, horários e avaliações do Google", "No ar em até 48h"], False)
+    btn = f'<a class="btn btn-wa" style="margin-top:20px" href="{modelo}" target="_blank" rel="noopener">Ver um exemplo do site completo</a>'
+    p2 = plano("Para vender mais", "Site completo", "R$ 1.500", "1º mês de manutenção grátis: qualquer problema ou alteração, sem custo",
+               ["Tudo do site, mais:"] + extras + ["Feito sob medida com os seus serviços e preços"], True, btn)
+    return f"""<section class="why"><div class="wrap"><div class="center"><div class="eyebrow">Duas versões</div><h2 class="sec-title">Escolha o site ideal para o seu momento</h2>
+<p class="sec-lead" style="margin-inline:auto">O endereço e a hospedagem acima valem para as duas versões.</p></div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:34px;margin-top:40px">{p1}{p2}</div></div></section>
+"""
+
+
 def pagina_opcoes(n):
     url = f"{BASE_URL}/{n['slug']}/opcoes/"
     og = U.format(n["hero_img"], 1200) + "&h=630"
@@ -731,7 +762,7 @@ def pagina_opcoes(n):
 <p class="sec-lead" style="font-size:19px">O site já está pronto. Você só escolhe o endereço. A hospedagem é gratuita nas duas opções.</p></div></header>
 <main>
 <section style="padding-top:20px"><div class="wrap"><div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:34px">{o1}{o2}</div></div></section>
-<section class="why"><div class="wrap"><div class="center"><div class="eyebrow">Passo a passo</div><h2 class="sec-title">Como registrar o domínio próprio (Opção 2)</h2></div>
+{secao_planos(n)}<section class="why"><div class="wrap"><div class="center"><div class="eyebrow">Passo a passo</div><h2 class="sec-title">Como registrar o domínio próprio (Opção 2)</h2></div>
 <ol class="steps" style="list-style:none;padding:0;grid-template-columns:1fr;max-width:760px;margin-inline:auto">{passos_html}</ol></div></section>
 <section><div class="wrap center"><div class="eyebrow">Sem custo extra</div><h2 class="sec-title">Incluído nas duas opções</h2>
 <div class="grid4 why" style="background:none;text-align:left">{incl_html}</div></div></section>

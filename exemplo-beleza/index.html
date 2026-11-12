@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Íris Studio · Cílios e sobrancelhas em Campinas · Site de exemplo</title>
+<meta name="description" content="Site de exemplo criado pela Porta Ad Omnia para estúdios de beleza: preço e duração do procedimento na hora, data da manutenção, plano mensal e agendamento pelo WhatsApp.">
+<meta property="og:title" content="Íris Studio · Cílios e sobrancelhas em Campinas · Site de exemplo">
+<meta property="og:description" content="Site de exemplo criado pela Porta Ad Omnia para estúdios de beleza: preço e duração do procedimento na hora, data da manutenção, plano mensal e agendamento pelo WhatsApp.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?w=1200&h=630&fit=crop&q=75&fm=jpg">
+<meta name="theme-color" content="#fbf7f6">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* =========================================================
+   AURORA CONFEITARIA · site de exemplo · Porta Ad Omnia
+   Base visual: fábrica de sites (mesma estrutura do Toska),
+   versão profissional, focada em venda e informação.
+   ========================================================= */
+:root{
+  --creme:#fbf7f1;
+  --creme-2:#f4ece1;
+  --branco:#fffdfa;
+  --cacau:#2e1d16;
+  --cacau-2:#5c463b;
+  --cacau-3:#8a776c;
+  --framboesa:#b8325a;
+  --framboesa-escura:#962446;
+  --framboesa-suave:#f7e1e7;
+  --pistache:#5f7d48;
+  --pistache-suave:#e7eedc;
+  --ouro:#c8912f;
+  --linha:#e8dccd;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --corpo:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --raio:20px;
+  --raio-p:12px;
+  --sombra:0 1px 2px rgba(46,29,22,.06), 0 10px 30px -12px rgba(46,29,22,.18);
+  --sombra-g:0 2px 6px rgba(46,29,22,.06), 0 30px 60px -24px rgba(46,29,22,.28);
+  --larg:1200px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:90px}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--creme);color:var(--cacau);font-family:var(--corpo);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:var(--framboesa);color:#fff}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:-.015em;margin:0}
+.envolve{max-width:var(--larg);margin:0 auto;padding:0 clamp(18px,4vw,32px)}
+.secao{padding:clamp(72px,10vw,120px) 0}
+.sobretitulo{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--framboesa);margin:0 0 14px}
+.sobretitulo::before{content:"";width:22px;height:2px;background:currentColor;border-radius:2px}
+.titulo-secao{font-size:clamp(34px,4.6vw,56px);max-width:18ch}
+.titulo-secao em{font-style:italic;color:var(--framboesa);font-weight:500}
+.intro{color:var(--cacau-2);max-width:56ch;margin:16px 0 0;font-size:clamp(16px,1.4vw,18px)}
+.cabeca-secao{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(32px,4vw,52px)}
+
+/* ---------- botões ---------- */
+.botao{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:999px;padding:14px 24px;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;transition:transform .2s, background .2s, box-shadow .2s, color .2s;white-space:nowrap}
+.botao svg{width:19px;height:19px;flex:0 0 auto}
+.botao--primario{background:var(--framboesa);color:#fff;box-shadow:0 8px 20px -8px rgba(184,50,90,.7)}
+.botao--primario:hover{background:var(--framboesa-escura);transform:translateY(-2px)}
+.botao--contorno{background:transparent;color:var(--cacau);box-shadow:inset 0 0 0 1.5px var(--cacau)}
+.botao--contorno:hover{background:var(--cacau);color:var(--creme)}
+.botao--claro{background:var(--branco);color:var(--cacau);box-shadow:var(--sombra)}
+.botao--claro:hover{transform:translateY(-2px)}
+.botao--whats{background:#1f9d55;color:#fff}
+.botao--whats:hover{background:#178246;transform:translateY(-2px)}
+.botao--bloco{width:100%}
+.botao[disabled]{opacity:.45;pointer-events:none}
+
+/* ---------- faixa de status ---------- */
+.status{background:var(--cacau);color:var(--creme);font-size:13.5px;font-weight:600}
+.status .envolve{display:flex;justify-content:space-between;gap:16px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
+.status__aberto{display:inline-flex;align-items:center;gap:8px}
+.status__ponto{width:8px;height:8px;border-radius:50%;background:#7bd389;box-shadow:0 0 0 4px rgba(123,211,137,.18)}
+.status__ponto.fechado{background:#e07a7a;box-shadow:0 0 0 4px rgba(224,122,122,.18)}
+.status__extra{opacity:.75}
+@media (max-width:640px){.status__extra{display:none}}
+
+/* ---------- topo ---------- */
+.topo{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.86);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .3s, box-shadow .3s}
+.topo.rolou{border-bottom-color:var(--linha);box-shadow:0 8px 24px -18px rgba(46,29,22,.4)}
+.topo .envolve{display:flex;align-items:center;justify-content:space-between;gap:20px;height:74px}
+.marca{display:flex;align-items:center;gap:11px;text-decoration:none}
+.marca__selo{width:40px;height:40px;border-radius:12px;background:var(--framboesa);display:grid;place-items:center;color:var(--creme)}
+.marca__selo svg{width:24px;height:24px}
+.marca__nome{font-family:var(--display);font-size:23px;font-weight:600;line-height:1}
+.marca__nome small{display:block;font-family:var(--corpo);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cacau-3);font-weight:700;margin-top:4px}
+.menu{display:flex;gap:4px}
+.menu a{text-decoration:none;font-weight:600;font-size:15px;padding:9px 14px;border-radius:999px;color:var(--cacau-2);transition:background .2s,color .2s}
+.menu a:hover{background:var(--creme-2);color:var(--cacau)}
+.topo__acoes{display:flex;gap:10px;align-items:center}
+.carrinho-botao{position:relative}
+.contador{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--cacau);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;border:2px solid var(--creme)}
+@media (max-width:980px){.menu{display:none}}
+@media (max-width:520px){.topo__acoes .botao--contorno{display:none}.marca__nome small{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(36px,6vw,72px) 0 clamp(60px,8vw,96px);position:relative;overflow:hidden}
+.hero .envolve{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
+.hero__selo{display:inline-flex;align-items:center;gap:10px;background:var(--branco);border:1px solid var(--linha);border-radius:999px;padding:7px 14px 7px 8px;font-size:14px;font-weight:600;color:var(--cacau-2);box-shadow:var(--sombra)}
+.hero__selo b{background:var(--pistache-suave);color:var(--pistache);border-radius:999px;padding:3px 10px;font-size:12.5px}
+.hero h1{font-size:clamp(42px,5.6vw,74px);margin:22px 0 0}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--framboesa)}
+.hero h1 .linha{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .linha > span{display:inline-block}
+.hero__texto{font-size:clamp(17px,1.5vw,20px);color:var(--cacau-2);max-width:46ch;margin:22px 0 30px}
+.hero__cta{display:flex;gap:12px;flex-wrap:wrap}
+.provas{display:flex;gap:clamp(18px,3vw,40px);margin-top:38px;padding-top:26px;border-top:1px solid var(--linha);flex-wrap:wrap}
+.prova b{display:block;font-family:var(--display);font-size:30px;font-weight:600;line-height:1}
+.prova > span{font-size:14px;color:var(--cacau-3);font-weight:600}
+.prova .estrelas{color:var(--ouro);letter-spacing:2px;font-size:15px}
+.hero__fotos{position:relative;aspect-ratio:4/4.6}
+.foto{position:absolute;border-radius:var(--raio);overflow:hidden;box-shadow:var(--sombra-g);background:var(--creme-2)}
+.foto img{width:100%;height:100%;object-fit:cover}
+.foto--a{inset:0 18% 14% 0}
+.foto--b{width:46%;aspect-ratio:1;right:0;bottom:0;border:6px solid var(--creme)}
+.cartao-flutua{position:absolute;left:-14px;bottom:20%;background:var(--branco);border-radius:16px;box-shadow:var(--sombra-g);padding:14px 16px;display:flex;gap:12px;align-items:center;max-width:250px}
+.cartao-flutua__icone{width:42px;height:42px;border-radius:12px;background:var(--framboesa-suave);color:var(--framboesa);display:grid;place-items:center;flex:0 0 auto}
+.cartao-flutua__icone svg{width:22px;height:22px}
+.cartao-flutua b{display:block;font-size:14.5px}
+.cartao-flutua span{font-size:13px;color:var(--cacau-3)}
+.selo-giro{position:absolute;right:30%;top:-26px;width:116px;height:116px}
+.selo-giro text{font-family:var(--corpo);font-weight:800;font-size:11.5px;letter-spacing:.2em;fill:var(--cacau);text-transform:uppercase}
+@media (max-width:900px){
+  .hero .envolve{grid-template-columns:1fr}
+  .hero__fotos{max-width:520px;width:100%;margin:10px auto 0}
+  .selo-giro{right:4%;top:-30px;width:96px;height:96px}
+}
+
+/* ---------- benefícios ---------- */
+.beneficios{background:var(--branco);border-block:1px solid var(--linha)}
+.beneficios .envolve{display:grid;grid-template-columns:repeat(4,1fr)}
+.beneficio{display:flex;gap:14px;align-items:flex-start;padding:26px 22px}
+.beneficio + .beneficio{border-left:1px solid var(--linha)}
+.beneficio__icone{width:44px;height:44px;border-radius:12px;background:var(--creme-2);color:var(--framboesa);display:grid;place-items:center;flex:0 0 auto}
+.beneficio__icone svg{width:22px;height:22px}
+.beneficio b{display:block;font-size:15.5px}
+.beneficio span{font-size:14px;color:var(--cacau-3)}
+@media (max-width:900px){.beneficios .envolve{grid-template-columns:1fr 1fr}.beneficio:nth-child(3){border-left:0}.beneficio:nth-child(n+3){border-top:1px solid var(--linha)}}
+@media (max-width:520px){.beneficios .envolve{grid-template-columns:1fr}.beneficio + .beneficio{border-left:0;border-top:1px solid var(--linha)}}
+
+/* ---------- aviso de fim de ano ---------- */
+.temporada{margin-top:clamp(56px,7vw,90px)}
+.temporada__caixa{display:grid;grid-template-columns:1.2fr 1fr;border-radius:28px;overflow:hidden;background:var(--cacau);color:var(--creme);box-shadow:var(--sombra-g)}
+.temporada__texto{padding:clamp(28px,4.5vw,56px)}
+.temporada__texto .sobretitulo{color:#f1b6c6}
+.temporada__texto h2{font-size:clamp(30px,3.6vw,46px)}
+.temporada__texto p{color:rgba(251,247,241,.78);margin:14px 0 24px;max-width:44ch}
+.contagem{display:flex;gap:10px;margin:0 0 26px}
+.contagem div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 10px;min-width:72px;text-align:center}
+.contagem b{display:block;font-family:var(--display);font-size:30px;line-height:1}
+.contagem span{font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:.7}
+.temporada__foto{position:relative;min-height:280px}
+.temporada__foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.temporada__caixa{grid-template-columns:1fr}.temporada__foto{min-height:220px;order:-1}}
+
+/* ---------- cardápio ---------- */
+.filtros{display:flex;gap:8px;flex-wrap:wrap}
+.filtro{border:1px solid var(--linha);background:var(--branco);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14.5px;cursor:pointer;color:var(--cacau-2);transition:all .2s}
+.filtro:hover{border-color:var(--cacau-3)}
+.filtro.ativo{background:var(--cacau);border-color:var(--cacau);color:var(--creme)}
+.produtos{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,265px),1fr));gap:clamp(16px,2vw,24px)}
+.produto{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s, box-shadow .3s}
+.produto:hover{transform:translateY(-4px);box-shadow:var(--sombra-g)}
+.produto__foto{position:relative;aspect-ratio:4/3.3;overflow:hidden;background:var(--creme-2)}
+.produto__foto img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.produto:hover .produto__foto img{transform:scale(1.05)}
+.etiqueta{position:absolute;top:12px;left:12px;background:var(--branco);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--framboesa)}
+.etiqueta--verde{color:var(--pistache)}
+.produto__corpo{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.produto h3{font-size:22px}
+.produto p{margin:8px 0 14px;font-size:15px;color:var(--cacau-2);flex:1}
+.produto__info{display:flex;gap:12px;font-size:13px;font-weight:700;color:var(--cacau-3);margin-bottom:14px;flex-wrap:wrap}
+.produto__info span{display:inline-flex;align-items:center;gap:5px}
+.produto__info svg{width:15px;height:15px}
+.produto__pe{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--linha);padding-top:14px}
+.preco small{display:block;font-size:12px;color:var(--cacau-3);font-weight:700}
+.preco b{font-family:var(--display);font-size:24px;font-weight:600}
+.botao--mini{padding:10px 16px;font-size:14px}
+.qtd{display:inline-flex;align-items:center;border:1.5px solid var(--cacau);border-radius:999px;overflow:hidden}
+.qtd button{width:38px;height:38px;border:0;background:transparent;cursor:pointer;font-size:19px;font-weight:700}
+.qtd button:hover{background:var(--creme-2)}
+.qtd span{min-width:26px;text-align:center;font-weight:800}
+@media (max-width:640px){
+  .produtos{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1*clamp(18px,4vw,32px));padding:4px clamp(18px,4vw,32px) 18px;scrollbar-width:none}
+  .produtos::-webkit-scrollbar{display:none}
+  .produto{scroll-snap-align:center}
+  .produto:hover{transform:none}
+}
+.foto-aviso{font-size:13px;color:var(--cacau-3);margin-top:18px}
+
+/* ---------- montador de bolo ---------- */
+.montador{background:var(--creme-2)}
+.montador__grade{display:grid;grid-template-columns:1.35fr .9fr;gap:clamp(20px,3vw,36px);align-items:start}
+.etapas{display:grid;gap:16px}
+.etapa{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:clamp(18px,2.4vw,26px)}
+.etapa__topo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.etapa__num{width:30px;height:30px;border-radius:50%;background:var(--cacau);color:var(--creme);font-weight:800;font-size:14px;display:grid;place-items:center;flex:0 0 auto}
+.etapa h3{font-family:var(--corpo);font-size:17px;font-weight:800;letter-spacing:0}
+.etapa__dica{margin-left:auto;font-size:13px;color:var(--cacau-3);font-weight:600;text-align:right}
+.opcoes{display:flex;flex-wrap:wrap;gap:8px}
+.opcao{position:relative}
+.opcao input{position:absolute;opacity:0;pointer-events:none}
+.opcao span{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--linha);border-radius:999px;padding:9px 15px;font-size:14.5px;font-weight:600;cursor:pointer;transition:all .18s;background:var(--branco)}
+.opcao span small{font-weight:700;color:var(--framboesa);font-size:12.5px}
+.opcao span:hover{border-color:var(--cacau-3)}
+.opcao input:checked + span{border-color:var(--cacau);background:var(--cacau);color:var(--creme)}
+.opcao input:checked + span small{color:#f1b6c6}
+.opcao input:focus-visible + span{outline:3px solid var(--framboesa);outline-offset:2px}
+.opcao input:disabled + span{opacity:.4;cursor:not-allowed}
+.regua{display:flex;align-items:center;gap:18px}
+.regua input[type=range]{flex:1;accent-color:var(--framboesa);height:6px}
+.regua__valor{min-width:150px;text-align:right}
+.regua__valor b{font-family:var(--display);font-size:30px;display:block;line-height:1}
+.regua__valor span{font-size:13px;color:var(--cacau-3);font-weight:700}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.campo label{display:block;font-size:13px;font-weight:800;color:var(--cacau-2);margin-bottom:6px}
+.campo input,.campo select,.campo textarea{width:100%;border:1.5px solid var(--linha);border-radius:var(--raio-p);background:var(--branco);padding:12px 14px;font-size:15px;transition:border-color .2s}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:0;border-color:var(--framboesa)}
+.campo--inteiro{grid-column:1/-1}
+.alerta{margin-top:10px;font-size:14px;font-weight:600;border-radius:var(--raio-p);padding:10px 12px}
+.alerta--aviso{background:#fdf1dc;color:#7a5410}
+.alerta--ok{background:var(--pistache-suave);color:#3e5a2b}
+@media (max-width:640px){.campos{grid-template-columns:1fr}.regua{flex-direction:column;align-items:stretch}.regua__valor{text-align:left}}
+
+.resumo{position:sticky;top:96px;background:var(--branco);border:1px solid var(--linha);border-radius:24px;padding:clamp(20px,2.6vw,28px);box-shadow:var(--sombra-g)}
+.resumo h3{font-size:26px}
+.resumo__lista{list-style:none;margin:18px 0;padding:0;display:grid;gap:10px}
+.resumo__lista li{display:flex;justify-content:space-between;gap:14px;font-size:14.5px;border-bottom:1px dashed var(--linha);padding-bottom:10px}
+.resumo__lista li span:first-child{color:var(--cacau-3);font-weight:600}
+.resumo__lista li span:last-child{font-weight:700;text-align:right}
+.resumo__total{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 4px}
+.resumo__total span{font-weight:700}
+.resumo__total b{font-family:var(--display);font-size:38px;font-weight:600}
+.resumo__nota{font-size:13px;color:var(--cacau-3);margin:0 0 18px}
+.resumo__botoes{display:grid;gap:10px}
+.sinal{display:flex;justify-content:space-between;background:var(--framboesa-suave);color:var(--framboesa-escura);border-radius:var(--raio-p);padding:10px 12px;font-size:14px;font-weight:700;margin-bottom:16px}
+@media (max-width:980px){.montador__grade{grid-template-columns:1fr}.resumo{position:static}}
+
+/* ---------- calculadora de docinhos ---------- */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,56px);align-items:center}
+.calc__caixa{background:var(--branco);border:1px solid var(--linha);border-radius:24px;padding:clamp(22px,3vw,34px);box-shadow:var(--sombra)}
+.contador-pessoas{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.contador-pessoas b{display:block}
+.contador-pessoas small{color:var(--cacau-3);font-weight:600}
+.contador-pessoas .qtd span{min-width:46px}
+.calc__resultado{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.calc__resultado div{background:var(--creme);border-radius:14px;padding:14px 12px}
+.calc__resultado b{font-family:var(--display);font-size:28px;display:block;line-height:1.1}
+.calc__resultado span{font-size:12.5px;color:var(--cacau-3);font-weight:700}
+.calc__foto{border-radius:28px;overflow:hidden;aspect-ratio:5/4;box-shadow:var(--sombra-g);background:var(--creme-2)}
+.calc__foto img{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.calc{grid-template-columns:1fr}.calc__foto{order:-1;aspect-ratio:16/9}}
+
+/* ---------- como funciona ---------- */
+.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:p}
+.passo{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:24px;position:relative}
+.passo::before{counter-increment:p;content:counter(p,decimal-leading-zero);font-family:var(--display);font-size:44px;font-weight:500;color:var(--framboesa);line-height:1;display:block;margin-bottom:14px}
+.passo h3{font-family:var(--corpo);font-size:17px;font-weight:800;letter-spacing:0;margin-bottom:6px}
+.passo p{margin:0;font-size:15px;color:var(--cacau-2)}
+.politicas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.politica{display:flex;gap:12px;align-items:flex-start;border-radius:var(--raio);padding:20px;background:var(--pistache-suave)}
+.politica svg{width:22px;height:22px;color:var(--pistache);flex:0 0 auto;margin-top:2px}
+.politica b{display:block;font-size:15px}
+.politica span{font-size:14px;color:var(--cacau-2)}
+@media (max-width:980px){.passos{grid-template-columns:1fr 1fr}.politicas{grid-template-columns:1fr}}
+@media (max-width:560px){.passos{grid-template-columns:1fr}}
+
+/* ---------- entrega ---------- */
+.entrega{background:var(--cacau);color:var(--creme)}
+.entrega .sobretitulo{color:#f1b6c6}
+.entrega .intro{color:rgba(251,247,241,.75)}
+.entrega__grade{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,4vw,60px);align-items:start}
+.busca-bairro{margin-top:28px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:22px}
+.busca-bairro label{font-weight:800;font-size:14px;display:block;margin-bottom:8px}
+.busca-bairro input{width:100%;border:0;border-radius:var(--raio-p);padding:14px 16px;font-size:16px;background:var(--creme);color:var(--cacau)}
+.busca-bairro input:focus{outline:3px solid var(--framboesa)}
+.busca-bairro__res{margin-top:14px;font-size:15.5px;font-weight:600;min-height:24px}
+.busca-bairro__res b{font-family:var(--display);font-size:24px;color:#f1b6c6}
+.zonas{display:grid;gap:12px}
+.zona{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:18px 20px;transition:background .25s,border-color .25s}
+.zona.destaque{background:rgba(184,50,90,.25);border-color:#f1b6c6}
+.zona__cor{width:14px;height:14px;border-radius:50%}
+.zona b{display:block;font-size:16px}
+.zona span{font-size:13.5px;opacity:.72}
+.zona__preco{font-family:var(--display);font-size:24px;white-space:nowrap}
+@media (max-width:860px){.entrega__grade{grid-template-columns:1fr}}
+
+/* ---------- depoimentos ---------- */
+.depoimentos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.depoimento{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:24px;display:flex;flex-direction:column;gap:14px}
+.depoimento .estrelas{color:var(--ouro);letter-spacing:2px}
+.depoimento p{margin:0;font-size:16px;flex:1}
+.depoimento footer{display:flex;align-items:center;gap:12px;font-size:14px}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff}
+.depoimento footer b{display:block}
+.depoimento footer span{color:var(--cacau-3);font-size:13px}
+.ficticio{font-size:13px;color:var(--cacau-3);margin-top:14px}
+@media (max-width:900px){.depoimentos{grid-template-columns:1fr}}
+
+/* ---------- dúvidas ---------- */
+.duvidas__grade{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,5vw,70px)}
+.pergunta{border-bottom:1px solid var(--linha)}
+.pergunta summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-weight:700;font-size:17px}
+.pergunta summary::-webkit-details-marker{display:none}
+.pergunta summary i{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--linha);display:grid;place-items:center;flex:0 0 auto;font-style:normal;transition:transform .3s, background .2s}
+.pergunta[open] summary i{transform:rotate(45deg);background:var(--cacau);color:var(--creme);border-color:var(--cacau)}
+.pergunta__resposta{padding:0 0 20px;color:var(--cacau-2);max-width:62ch}
+@media (max-width:860px){.duvidas__grade{grid-template-columns:1fr}}
+
+/* ---------- local ---------- */
+.local__grade{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.local__caixa{background:var(--branco);border:1px solid var(--linha);border-radius:24px;padding:clamp(22px,3vw,34px)}
+.horarios{list-style:none;padding:0;margin:18px 0 0}
+.horarios li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--linha);font-size:15.5px}
+.horarios li.hoje{font-weight:800;color:var(--framboesa)}
+.horarios li.hoje span:first-child::after{content:" · hoje";font-weight:700}
+.local__mapa{border-radius:24px;overflow:hidden;position:relative;min-height:320px;background:
+  linear-gradient(0deg,rgba(46,29,22,.0),rgba(46,29,22,.0)),
+  repeating-linear-gradient(90deg,transparent 0 58px,rgba(46,29,22,.06) 58px 60px),
+  repeating-linear-gradient(0deg,transparent 0 58px,rgba(46,29,22,.06) 58px 60px),
+  var(--creme-2)}
+.local__mapa svg{position:absolute;inset:0;width:100%;height:100%}
+.pino{position:absolute;left:50%;top:46%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center}
+.pino b{background:var(--cacau);color:var(--creme);border-radius:999px;padding:8px 14px;font-size:14px;white-space:nowrap;box-shadow:var(--sombra)}
+.pino i{width:18px;height:18px;border-radius:50%;background:var(--framboesa);border:4px solid var(--branco);margin-top:6px;box-shadow:0 0 0 8px rgba(184,50,90,.18)}
+.local__mapa .botao{position:absolute;left:50%;bottom:22px;transform:translateX(-50%)}
+@media (max-width:860px){.local__grade{grid-template-columns:1fr}}
+
+/* ---------- chamada final + rodapé ---------- */
+.final{padding:clamp(60px,8vw,100px) 0}
+.final__caixa{border-radius:32px;background:var(--framboesa);color:#fff;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:1.4fr auto;gap:28px;align-items:center;position:relative;overflow:hidden}
+.final__caixa h2{font-size:clamp(32px,4.4vw,56px);max-width:16ch}
+.final__caixa p{opacity:.85;margin:14px 0 0;max-width:46ch}
+.final__caixa::after{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08)}
+@media (max-width:760px){.final__caixa{grid-template-columns:1fr}}
+.rodape{background:var(--cacau);color:rgba(251,247,241,.8);padding:56px 0 30px;font-size:14.5px}
+.rodape__grade{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.12)}
+.rodape h4{color:var(--creme);font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px}
+.rodape a{color:rgba(251,247,241,.8);text-decoration:none}
+.rodape a:hover{color:#fff}
+.rodape ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rodape .marca__nome{color:var(--creme)}
+.rodape__base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;font-size:13.5px}
+.rodape__base b{color:#f1b6c6}
+@media (max-width:760px){.rodape__grade{grid-template-columns:1fr}.rodape{padding-bottom:110px}}
+
+/* ---------- selo de exemplo ---------- */
+.selo-exemplo{position:fixed;left:16px;bottom:16px;z-index:55;background:var(--cacau);color:var(--creme);border-radius:999px;padding:9px 14px 9px 10px;font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:var(--sombra-g);text-decoration:none}
+.selo-exemplo.some{opacity:0;pointer-events:none}
+.selo-exemplo{transition:opacity .3s}
+.selo-exemplo i{width:22px;height:22px;border-radius:50%;background:var(--framboesa);display:grid;place-items:center;font-style:normal;font-size:12px}
+@media (max-width:760px){.selo-exemplo{display:none}}
+
+/* ---------- barra de pedido (celular) ---------- */
+.barra-pedido{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;background:var(--cacau);color:var(--creme);border-radius:18px;padding:12px 12px 12px 18px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--sombra-g)}
+.barra-pedido b{font-family:var(--display);font-size:20px;display:block;line-height:1.1}
+.barra-pedido span{font-size:13px;opacity:.75}
+@media (max-width:760px){.barra-pedido.tem{display:flex}}
+
+/* ---------- gaveta do pedido ---------- */
+.gaveta{position:fixed;inset:0;z-index:80;visibility:hidden}
+.gaveta.aberta{visibility:visible}
+.gaveta__fundo{position:absolute;inset:0;background:rgba(46,29,22,.45);opacity:0;transition:opacity .3s}
+.gaveta.aberta .gaveta__fundo{opacity:1}
+.gaveta__painel{position:absolute;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--creme);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);box-shadow:var(--sombra-g)}
+.gaveta.aberta .gaveta__painel{transform:none}
+.gaveta__topo{display:flex;align-items:center;justify-content:space-between;padding:22px 22px 16px;border-bottom:1px solid var(--linha)}
+.gaveta__topo h2{font-size:28px}
+.fechar{width:42px;height:42px;border-radius:50%;border:1px solid var(--linha);background:var(--branco);cursor:pointer;font-size:22px;line-height:1}
+.gaveta__corpo{flex:1;overflow:auto;padding:18px 22px}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--linha)}
+.item img,.item .item__ico{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--creme-2)}
+.item .item__ico{display:grid;place-items:center;color:var(--framboesa)}
+.item b{display:block;font-size:15px;line-height:1.3}
+.item small{display:block;color:var(--cacau-3);font-size:13px;margin-top:2px}
+.item__preco{text-align:right;font-weight:800;font-size:15px}
+.item__preco .qtd{margin-top:6px}
+.item__preco .qtd button{width:30px;height:30px;font-size:16px}
+.item__remover{background:none;border:0;color:var(--framboesa);font-weight:700;font-size:13px;cursor:pointer;padding:4px 0 0}
+.vazio{text-align:center;padding:40px 10px;color:var(--cacau-3)}
+.vazio svg{width:46px;height:46px;margin:0 auto 12px;color:var(--linha)}
+.gaveta__form{display:grid;gap:12px;margin-top:20px}
+.gaveta__pe{border-top:1px solid var(--linha);padding:16px 22px 22px;background:var(--branco)}
+.linha-total{display:flex;justify-content:space-between;font-size:15px;margin-bottom:6px}
+.linha-total.grande{font-size:18px;font-weight:800;margin:10px 0 14px}
+.linha-total.grande b{font-family:var(--display);font-size:28px}
+
+/* ---------- janela de demonstração ---------- */
+.janela{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:18px;visibility:hidden}
+.janela.aberta{visibility:visible}
+.janela__fundo{position:absolute;inset:0;background:rgba(46,29,22,.55)}
+.janela__caixa{position:relative;background:var(--creme);border-radius:24px;width:min(520px,100%);max-height:90svh;overflow:auto;padding:26px;box-shadow:var(--sombra-g)}
+.janela__caixa h2{font-size:26px;margin-bottom:8px}
+.janela__caixa > p{color:var(--cacau-2);margin:0 0 16px;font-size:15px}
+.whats-previa{background:#e6ddd4;border-radius:18px;padding:16px}
+.balao{background:#d9fdd3;border-radius:12px 12px 4px 12px;padding:12px 14px;font-size:14.5px;white-space:pre-wrap;margin-left:auto;max-width:92%;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.balao small{display:block;text-align:right;color:#667781;font-size:11.5px;margin-top:6px}
+.janela__botoes{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.janela__botoes .botao{flex:1}
+
+/* ---------- aviso rápido ---------- */
+.toast{position:fixed;left:50%;top:90px;transform:translate(-50%,-20px);z-index:95;background:var(--cacau);color:var(--creme);border-radius:999px;padding:11px 18px;font-weight:700;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .25s, transform .25s;display:flex;gap:8px;align-items:center;box-shadow:var(--sombra-g)}
+.toast.mostra{opacity:1;transform:translate(-50%,0)}
+.toast svg{width:18px;height:18px;color:#7bd389}
+
+.oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--framboesa);outline-offset:3px}
+.revela{will-change:transform,opacity}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* --- extras do modelo de serviços --- */
+.plano__linha{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.plano__linha select{border:1.5px solid var(--linha);border-radius:var(--raio-p);padding:10px 12px;background:var(--branco);font-weight:700;max-width:60%}
+.cuidados{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cuidado{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:20px}
+.cuidado b{display:block;font-size:16px;margin-bottom:6px}
+.cuidado span{font-size:14.5px;opacity:.78}
+@media (max-width:640px){.cuidados{grid-template-columns:1fr}}
+.campo--hora{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+<style>:root{--creme:#fbf7f6;--creme-2:#f3e8e5;--branco:#fffdfc;--cacau:#2b1e22;--cacau-2:#5a464b;--cacau-3:#8a777b;--framboesa:#a5566a;--framboesa-escura:#874255;--framboesa-suave:#f6e3e8;--linha:#eadbd7;--ouro:#c79a4a}</style>
+</head>
+<body>
+
+<!-- =========================================================
+     CONFIGURAÇÃO — edite só este bloco (modelo de serviços da Porta Ad Omnia)
+     whatsapp vazio = modo demonstração (mostra a mensagem numa janela).
+     Preço do montador = (soma dos "soma") × (produto dos "mult") + soma dos "fixo".
+     ========================================================= -->
+<script>
+window.LOJA = {
+ "nome": "Íris Studio",
+ "marcaCurta": "Íris",
+ "marcaSub": "Cílios · Campinas",
+ "icone": "i-olho",
+ "whatsapp": "",
+ "statusExtra": "Atendimento com hora marcada · Agendamento pelo WhatsApp · Pix e cartão",
+ "cta_topo": "Ver preço e duração",
+ "horarios": {
+  "0": null,
+  "1": null,
+  "2": [
+   9,
+   19
+  ],
+  "3": [
+   9,
+   19
+  ],
+  "4": [
+   9,
+   19
+  ],
+  "5": [
+   9,
+   19
+  ],
+  "6": [
+   9,
+   17
+  ]
+ },
+ "periodos": [
+  "Manhã (9h às 12h)",
+  "Tarde (13h às 16h)",
+  "Fim da tarde (16h às 19h)"
+ ],
+ "hero": {
+  "selo": [
+   "Novo",
+   "Agenda de festas de fim de ano aberta"
+  ],
+  "titulo": [
+   "Cílios e sobrancelhas",
+   "com <em>preço na hora</em>"
+  ],
+  "texto": "Escolha o procedimento e o efeito: o site mostra o valor, quanto tempo leva e já sugere a data da manutenção. O agendamento chega pronto no WhatsApp.",
+  "cta1": "Ver preço e duração",
+  "cta2": "Ver procedimentos",
+  "provas": [
+   [
+    "5,0",
+    "no Google",
+    true
+   ],
+   [
+    "1.500+",
+    "atendimentos",
+    false
+   ],
+   [
+    "21 dias",
+    "de durabilidade",
+    false
+   ]
+  ],
+  "fotoA": {
+   "id": "1589710751893-f9a6770ad71b",
+   "alt": "Profissional aplicando extensão de cílios"
+  },
+  "fotoB": {
+   "id": "1683719312734-e31de63957ab",
+   "alt": "Olho com cílios longos"
+  },
+  "flutua": {
+   "titulo": "Manutenção lembrada",
+   "texto": "O site sugere a data certa da volta"
+  },
+  "giro": "Olhar natural · Materiais de qualidade · Campinas ·"
+ },
+ "beneficios": [
+  [
+   "i-calc",
+   "Preço e duração",
+   "Você sabe tudo antes de agendar"
+  ],
+  [
+   "i-relogio",
+   "Manutenção na data",
+   "O site calcula a próxima visita"
+  ],
+  [
+   "i-check",
+   "Materiais de qualidade",
+   "Conforto e durabilidade no dia a dia"
+  ],
+  [
+   "i-folha",
+   "Resultado natural",
+   "Efeito combinado antes de começar"
+  ]
+ ],
+ "temporada": {
+  "sobre": "Festas de fim de ano",
+  "titulo": "A agenda de dezembro fecha em",
+  "prazo": "2026-12-18T19:00:00-03:00",
+  "texto": "Cílios prontos para as fotos de Natal e Ano-Novo. Dezembro lota rápido: garanta o seu horário com antecedência.",
+  "botao": "Garantir meu horário",
+  "foto": {
+   "id": "1772236617396-2f8460293c07",
+   "alt": "Profissional atendendo uma cliente"
+  }
+ },
+ "servicos": {
+  "titulo": "Escolha o seu e <em>agende em um toque</em>",
+  "categorias": {
+   "todos": "Todos",
+   "cilios": "Cílios",
+   "sobrancelhas": "Sobrancelhas"
+  },
+  "aviso": "Fotos ilustrativas. O botão \"Personalizar\" leva para o simulador com o procedimento já escolhido.",
+  "itens": [
+   {
+    "id": "fio",
+    "cat": "cilios",
+    "nome": "Extensão fio a fio",
+    "desc": "Efeito natural, como se fossem os seus cílios, só que mais longos.",
+    "foto": "1639629509821-c54cdd984227",
+    "info1": "2h",
+    "info2": "Dura até 21 dias",
+    "preco": 160,
+    "unid": "a partir de",
+    "monta": {
+     "procedimento": "Extensão fio a fio"
+    },
+    "etiqueta": "Mais pedido"
+   },
+   {
+    "id": "volume",
+    "cat": "cilios",
+    "nome": "Volume brasileiro",
+    "desc": "Mais volume e definição, ainda leve no dia a dia.",
+    "foto": "1674049406467-824ea37c7184",
+    "info1": "2h20",
+    "info2": "Dura até 21 dias",
+    "preco": 180,
+    "unid": "a partir de",
+    "monta": {
+     "procedimento": "Volume brasileiro"
+    }
+   },
+   {
+    "id": "lifting",
+    "cat": "cilios",
+    "nome": "Lash lifting",
+    "desc": "Curvatura e alongamento dos seus próprios cílios, sem extensão.",
+    "foto": "1683719312734-e31de63957ab",
+    "info1": "1h",
+    "info2": "Dura até 45 dias",
+    "preco": 120,
+    "unid": "a partir de",
+    "monta": {
+     "procedimento": "Lash lifting"
+    }
+   },
+   {
+    "id": "manut",
+    "cat": "cilios",
+    "nome": "Manutenção de cílios",
+    "desc": "Reposição dos fios para manter o efeito por mais tempo.",
+    "foto": "1770999086860-143f54adf01b",
+    "info1": "1h",
+    "info2": "Até 21 dias",
+    "preco": 90,
+    "unid": "a partir de",
+    "monta": {
+     "procedimento": "Manutenção de cílios"
+    }
+   },
+   {
+    "id": "design",
+    "cat": "sobrancelhas",
+    "nome": "Design de sobrancelhas",
+    "desc": "Desenho que valoriza o seu rosto, limpinho e alinhado.",
+    "foto": "1674049406179-d7bf2c263e71",
+    "info1": "30 min",
+    "info2": "A cada 20 dias",
+    "preco": 45,
+    "unid": "avulso"
+   },
+   {
+    "id": "henna",
+    "cat": "sobrancelhas",
+    "nome": "Design com henna",
+    "desc": "Preenche falhas e realça o formato por até 15 dias.",
+    "foto": "1718720410649-7524fcb0f0a5",
+    "info1": "40 min",
+    "info2": "A cada 20 dias",
+    "preco": 65,
+    "unid": "avulso"
+   }
+  ]
+ },
+ "montador": {
+  "sobre": "Simulador",
+  "menu": "Simulador",
+  "titulo": "Quanto custa e <em>quanto tempo leva?</em>",
+  "intro": "Escolha o procedimento, o efeito e os complementos. O site mostra o preço, a duração e a data da próxima manutenção.",
+  "resumo": "Seu atendimento",
+  "botao": "Agendar pelo WhatsApp",
+  "principal": 0,
+  "mostrarSoma": true,
+  "nota": "Valor final confirmado no WhatsApp.",
+  "obsRotulo": "Alguma observação?",
+  "obsDica": "Ex.: primeira vez, alergia, referência do efeito",
+  "grupos": [
+   {
+    "id": "procedimento",
+    "titulo": "Procedimento",
+    "curto": "Procedimento",
+    "tipo": "radio",
+    "opcoes": [
+     {
+      "nome": "Extensão fio a fio",
+      "soma": 160,
+      "min": 120,
+      "manut": 21
+     },
+     {
+      "nome": "Volume brasileiro",
+      "soma": 180,
+      "min": 140,
+      "manut": 21
+     },
+     {
+      "nome": "Volume russo",
+      "soma": 220,
+      "min": 160,
+      "manut": 21
+     },
+     {
+      "nome": "Lash lifting",
+      "soma": 120,
+      "min": 60,
+      "manut": 45
+     },
+     {
+      "nome": "Manutenção de cílios",
+      "soma": 90,
+      "min": 60,
+      "manut": 21
+     }
+    ]
+   },
+   {
+    "id": "efeito",
+    "titulo": "Efeito",
+    "curto": "Efeito",
+    "tipo": "radio",
+    "opcoes": [
+     {
+      "nome": "Natural"
+     },
+     {
+      "nome": "Gatinho"
+     },
+     {
+      "nome": "Boneca"
+     },
+     {
+      "nome": "Marcante"
+     }
+    ]
+   },
+   {
+    "id": "sobrancelha",
+    "titulo": "Sobrancelhas no mesmo horário",
+    "curto": "Sobrancelhas",
+    "dica": "Opcional · até 2",
+    "tipo": "checkbox",
+    "max": 2,
+    "opcoes": [
+     {
+      "nome": "Design",
+      "fixo": 40,
+      "min": 30
+     },
+     {
+      "nome": "Design com henna",
+      "fixo": 60,
+      "min": 40
+     },
+     {
+      "nome": "Brow lamination",
+      "fixo": 120,
+      "min": 60
+     },
+     {
+      "nome": "Buço",
+      "fixo": 18,
+      "min": 10
+     }
+    ]
+   },
+   {
+    "id": "extras",
+    "titulo": "Precisa de mais alguma coisa?",
+    "curto": "Extras",
+    "dica": "Opcional",
+    "tipo": "checkbox",
+    "opcoes": [
+     {
+      "nome": "Remover extensão de outro lugar",
+      "fixo": 40,
+      "min": 30
+     },
+     {
+      "nome": "Kit de cuidados (escovinha + espuma)",
+      "fixo": 25
+     }
+    ]
+   }
+  ]
+ },
+ "zonas": null,
+ "entregaRotulo": "",
+ "info": {
+  "sobre": "Depois do procedimento",
+  "menu": "Cuidados",
+  "titulo": "Cuidados para durar <em style=\"color:#f1b6c6\">muito mais</em>",
+  "intro": "Seguindo estes cuidados, os cílios ficam bonitos até a manutenção. A gente também manda tudo por escrito no WhatsApp.",
+  "itens": [
+   [
+    "Nas primeiras 24 horas",
+    "Evite molhar os cílios, vapor e sauna."
+   ],
+   [
+    "Todos os dias",
+    "Escove com a escovinha e lave com espuma própria para cílios."
+   ],
+   [
+    "Na hora de dormir",
+    "Prefira dormir de barriga para cima ou de lado, sem esfregar o rosto."
+   ],
+   [
+    "Maquiagem",
+    "Use demaquilante sem óleo e evite rímel nos fios."
+   ]
+  ]
+ },
+ "plano": {
+  "sobre": "Plano mensal",
+  "titulo": "Manutenção em dia <em>sai mais barato</em>",
+  "intro": "Quem mantém os cílios e as sobrancelhas sempre em dia economiza no plano mensal. Escolha o serviço e a frequência.",
+  "rotulo": "Atendimentos",
+  "padrao": 2,
+  "max": 4,
+  "desconto": 0.1,
+  "opcoes": [
+   [
+    "Manutenção de cílios",
+    90
+   ],
+   [
+    "Design de sobrancelhas",
+    45
+   ],
+   [
+    "Design com henna",
+    65
+   ],
+   [
+    "Manutenção + design",
+    130
+   ]
+  ],
+  "foto": {
+   "id": "1770999086860-143f54adf01b",
+   "alt": "Materiais de extensão de cílios"
+  }
+ },
+ "passosTitulo": "Do agendamento ao <em>olhar renovado</em>",
+ "passos": [
+  [
+   "Simule e agende",
+   "Veja preço e duração no site e mande pelo WhatsApp."
+  ],
+  [
+   "Confirmamos o horário",
+   "Respondemos em até 1 hora no horário de atendimento."
+  ],
+  [
+   "Combinamos o efeito",
+   "Antes de começar, a gente alinha o resultado com você."
+  ],
+  [
+   "Volte na data certa",
+   "Avisamos no WhatsApp quando chegar a hora da manutenção."
+  ]
+ ],
+ "politicas": [
+  [
+   "Primeira vez",
+   "Fazemos uma conversa rápida antes para escolher o efeito ideal."
+  ],
+  [
+   "Alergias",
+   "Avise no agendamento. Temos opções para olhos sensíveis."
+  ],
+  [
+   "Remarcação",
+   "Sem custo com até 24 horas de aviso."
+  ]
+ ],
+ "depoimentos": [
+  [
+   "Vi o preço e o tempo no site antes de marcar. Fiquei tranquila e o resultado ficou muito natural.",
+   "Camila R.",
+   "Fio a fio · Cambuí"
+  ],
+  [
+   "Adoro que me avisam a data da manutenção. Nunca mais deixei falhar.",
+   "Patrícia L.",
+   "Volume brasileiro · Taquaral"
+  ],
+  [
+   "Já tinha feito em outros lugares e nunca ficou do jeito que eu queria. Aqui acertaram de primeira.",
+   "Larissa M.",
+   "Lash lifting · Barão Geraldo"
+  ]
+ ],
+ "faq": [
+  [
+   "Quanto tempo dura a extensão?",
+   "Com os cuidados certos, de 15 a 21 dias até a manutenção. O simulador já sugere a data."
+  ],
+  [
+   "Dói ou incomoda?",
+   "Não. Você fica deitada, de olhos fechados, e muita gente até cochila."
+  ],
+  [
+   "Qual efeito combina comigo?",
+   "Na primeira vez, conversamos antes para escolher o efeito pelo formato dos seus olhos."
+  ],
+  [
+   "Posso fazer sobrancelha no mesmo horário?",
+   "Pode. Escolha no simulador e somamos o tempo e o valor."
+  ],
+  [
+   "Tenho olhos sensíveis. Posso fazer?",
+   "Avise no agendamento: temos cola e materiais para olhos sensíveis."
+  ],
+  [
+   "E se eu precisar remarcar?",
+   "Sem custo com até 24 horas de aviso."
+  ]
+ ],
+ "final": {
+  "titulo": "O seu olhar, do jeitinho que você quer",
+  "texto": "Veja preço e duração agora, escolha o dia e a gente cuida do resto.",
+  "botao": "Ver preço e duração"
+ },
+ "rodape": "Extensão de cílios, lash lifting e sobrancelhas em Campinas."
+};
+</script>
+
+<div class="status"><div class="envolve">
+  <span class="status__aberto"><i class="status__ponto" data-status-ponto></i><span data-status-texto>Carregando horário…</span></span>
+  <span class="status__extra" data-status-extra></span>
+</div></div>
+
+<header class="topo"><div class="envolve">
+  <a class="marca" href="#inicio"><span class="marca__selo"><svg aria-hidden="true"><use data-icone href="#i-pata"/></svg></span><span class="marca__nome" data-marca></span></a>
+  <nav class="menu" aria-label="Principal" data-menu></nav>
+  <div class="topo__acoes">
+    <a class="botao botao--contorno botao--mini" href="#monte" data-txt="cta_topo"></a>
+    <button class="botao botao--primario botao--mini carrinho-botao" type="button" data-abre-pedido aria-label="Abrir seu agendamento"><svg aria-hidden="true"><use href="#i-sacola"/></svg><span>Agenda</span><span class="contador" data-contador hidden>0</span></button>
+  </div>
+</div></header>
+
+<main id="inicio">
+  <section class="hero"><div class="envolve">
+    <div>
+      <span class="hero__selo revela" data-hero-selo></span>
+      <h1 data-hero-titulo></h1>
+      <p class="hero__texto revela" data-txt="hero.texto"></p>
+      <div class="hero__cta revela">
+        <a class="botao botao--primario" href="#monte"><svg aria-hidden="true"><use href="#i-calc"/></svg><span data-txt="hero.cta1"></span></a>
+        <a class="botao botao--contorno" href="#servicos" data-txt="hero.cta2"></a>
+      </div>
+      <div class="provas" data-provas></div>
+    </div>
+    <div class="hero__fotos">
+      <div class="foto foto--a"><img data-foto-cfg="hero.fotoA" data-w="900" alt="" fetchpriority="high"></div>
+      <div class="foto foto--b"><img data-foto-cfg="hero.fotoB" data-w="500" alt=""></div>
+      <div class="cartao-flutua"><span class="cartao-flutua__icone"><svg aria-hidden="true"><use href="#i-check"/></svg></span><span><b data-txt="hero.flutua.titulo"></b><span data-txt="hero.flutua.texto"></span></span></div>
+      <svg class="selo-giro" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="circulo" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle cx="100" cy="100" r="96" fill="#fffdfa" stroke="#e8dccd" stroke-width="2"/>
+        <g class="selo-giro__txt"><text><textPath href="#circulo" data-txt="hero.giro"></textPath></text></g>
+        <use href="#i-coracao" x="72" y="72" width="56" height="56" style="color:var(--framboesa)"/>
+      </svg>
+    </div>
+  </div></section>
+
+  <section class="beneficios" aria-label="Diferenciais"><div class="envolve" data-beneficios></div></section>
+
+  <div class="envolve temporada" data-temporada-bloco>
+    <div class="temporada__caixa revela">
+      <div class="temporada__texto">
+        <p class="sobretitulo" data-txt="temporada.sobre"></p>
+        <h2 data-txt="temporada.titulo"></h2>
+        <div class="contagem" aria-live="polite"><div><b data-c="d">00</b><span>dias</span></div><div><b data-c="h">00</b><span>horas</span></div><div><b data-c="m">00</b><span>min</span></div></div>
+        <p data-txt="temporada.texto"></p>
+        <a class="botao botao--primario" href="#monte" data-txt="temporada.botao"></a>
+      </div>
+      <div class="temporada__foto"><img data-foto-cfg="temporada.foto" data-w="900" alt="" loading="lazy"></div>
+    </div>
+  </div>
+
+  <section class="secao" id="servicos"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo">Serviços</p><h2 class="titulo-secao" data-html="servicos.titulo"></h2></div><div class="filtros" role="tablist" data-filtros></div></div>
+    <div class="produtos" data-produtos></div>
+    <p class="foto-aviso" data-txt="servicos.aviso"></p>
+  </div></section>
+
+  <section class="secao montador" id="monte"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo" data-txt="montador.sobre"></p><h2 class="titulo-secao" data-html="montador.titulo"></h2><p class="intro" data-txt="montador.intro"></p></div></div>
+    <div class="montador__grade">
+      <form class="etapas" data-montador novalidate></form>
+      <aside class="resumo" aria-live="polite">
+        <p class="sobretitulo" style="margin-bottom:8px" data-txt="montador.resumo"></p>
+        <h3 data-r-titulo></h3>
+        <ul class="resumo__lista" data-r-lista></ul>
+        <div class="resumo__total"><span>Total estimado</span><b data-r-total>R$ 0</b></div>
+        <p class="resumo__nota" data-r-nota></p>
+        <div class="resumo__botoes">
+          <button class="botao botao--whats botao--bloco" type="button" data-enviar-monta><svg aria-hidden="true"><use href="#i-whats"/></svg><span data-txt="montador.botao"></span></button>
+          <button class="botao botao--contorno botao--bloco" type="button" data-add-monta>Adicionar à agenda e ver mais serviços</button>
+        </div>
+      </aside>
+    </div>
+  </div></section>
+
+  <section class="secao" id="plano"><div class="envolve calc">
+    <div>
+      <p class="sobretitulo" data-txt="plano.sobre"></p>
+      <h2 class="titulo-secao" data-html="plano.titulo"></h2>
+      <p class="intro" data-txt="plano.intro"></p>
+      <div class="calc__caixa revela" style="margin-top:28px">
+        <div class="plano__linha"><b>Serviço</b><select data-plano-servico aria-label="Serviço do plano"></select></div>
+        <div class="contador-pessoas"><span><b data-txt="plano.rotulo"></b><small>por mês</small></span>
+          <span class="qtd"><button type="button" data-plano-d="-1" aria-label="Menos">−</button><span data-plano-vezes>2</span><button type="button" data-plano-d="1" aria-label="Mais">+</button></span></div>
+        <div class="calc__resultado">
+          <div><b data-plano-avulso>R$ 0</b><span>avulso no mês</span></div>
+          <div><b data-plano-total>R$ 0</b><span>no plano mensal</span></div>
+          <div><b data-plano-eco>R$ 0</b><span>de economia</span></div>
+        </div>
+        <button class="botao botao--primario botao--bloco" type="button" data-plano-add style="margin-top:18px">Quero o plano mensal</button>
+      </div>
+    </div>
+    <div class="calc__foto revela"><img data-foto-cfg="plano.foto" data-w="900" alt="" loading="lazy"></div>
+  </div></section>
+
+  <section class="secao" style="padding-top:0"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo">Como funciona</p><h2 class="titulo-secao" data-html="passosTitulo"></h2></div></div>
+    <div class="passos" data-passos></div>
+    <div class="politicas" data-politicas></div>
+  </div></section>
+
+  <section class="secao entrega" id="info"><div class="envolve entrega__grade">
+    <div>
+      <p class="sobretitulo" data-txt="info.sobre"></p>
+      <h2 class="titulo-secao" style="color:var(--creme)" data-html="info.titulo"></h2>
+      <p class="intro" data-txt="info.intro"></p>
+      <div class="busca-bairro revela" data-busca-bloco>
+        <label for="busca-bairro">Seu bairro</label>
+        <input id="busca-bairro" list="lista-bairros" placeholder="Ex.: Cambuí" autocomplete="off">
+        <div class="busca-bairro__res" data-busca-res aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="zonas" data-zonas></div>
+    <datalist id="lista-bairros"></datalist>
+  </div></section>
+
+  <section class="secao"><div class="envolve">
+    <div class="cabeca-secao"><div><p class="sobretitulo">Quem já veio</p><h2 class="titulo-secao">O que dizem <em>depois</em></h2></div></div>
+    <div class="depoimentos" data-depoimentos></div>
+    <p class="ficticio">Depoimentos fictícios, apenas para demonstração. No site do cliente entram as avaliações reais do Google.</p>
+  </div></section>
+
+  <section class="secao" id="duvidas" style="padding-top:0"><div class="envolve duvidas__grade">
+    <div><p class="sobretitulo">Dúvidas</p><h2 class="titulo-secao">Antes de você <em>perguntar</em></h2><p class="intro">As perguntas que mais chegam no WhatsApp, já respondidas.</p>
+      <a class="botao botao--contorno" href="#" data-whats-duvida style="margin-top:22px"><svg aria-hidden="true"><use href="#i-whats"/></svg>Outra dúvida? Fale com a gente</a></div>
+    <div data-faq></div>
+  </div></section>
+
+  <section class="secao" style="padding-top:0"><div class="envolve"><div class="local__grade">
+    <div class="local__caixa revela"><p class="sobretitulo">Horários</p><h2 class="titulo-secao" style="font-size:clamp(30px,3.4vw,42px)">Atendimento com hora marcada</h2><ul class="horarios" data-horarios></ul></div>
+    <div class="local__mapa revela">
+      <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-20 260 C120 220 200 300 320 250 S520 160 640 210" fill="none" stroke="#e8dccd" stroke-width="26"/><path d="M180 -20 C210 120 160 260 230 420" fill="none" stroke="#e8dccd" stroke-width="18"/><path d="M420 -20 L380 420" fill="none" stroke="#e8dccd" stroke-width="14"/><circle cx="470" cy="90" r="46" fill="#e7eedc"/><circle cx="110" cy="330" r="34" fill="#e7eedc"/></svg>
+      <div class="pino"><b data-txt="nome"></b><i></i></div>
+      <a class="botao botao--claro" href="https://www.google.com/maps/search/?api=1&query=Campinas%2C%20SP" target="_blank" rel="noopener">Abrir no Google Maps</a>
+    </div>
+  </div></div></section>
+
+  <section class="final"><div class="envolve"><div class="final__caixa revela">
+    <div><h2 data-txt="final.titulo"></h2><p data-txt="final.texto"></p></div>
+    <a class="botao botao--claro" href="#monte"><svg aria-hidden="true"><use href="#i-calc"/></svg><span data-txt="final.botao"></span></a>
+  </div></div></section>
+</main>
+
+<footer class="rodape"><div class="envolve">
+  <div class="rodape__grade">
+    <div><a class="marca" href="#inicio" style="margin-bottom:14px"><span class="marca__selo"><svg aria-hidden="true"><use data-icone href="#i-pata"/></svg></span><span class="marca__nome" data-txt="marcaCurta"></span></a><p style="margin:0;max-width:36ch" data-txt="rodape"></p></div>
+    <div><h4>Navegue</h4><ul data-rodape-menu></ul></div>
+    <div><h4>Contato</h4><ul><li><a href="#" data-whats-duvida>WhatsApp</a></li><li>Campinas · SP</li><li>Pix, crédito e débito</li></ul></div>
+  </div>
+  <div class="rodape__base"><span>Site de exemplo. Marca, preços e avaliações fictícios.</span><span>Site criado por <b>Porta Ad Omnia</b></span></div>
+</div></footer>
+
+<a class="selo-exemplo" href="#inicio"><i>i</i>Site de exemplo · Porta Ad Omnia</a>
+<div class="barra-pedido" data-barra><div><b data-barra-total>R$ 0</b><span data-barra-itens>0 itens</span></div><button class="botao botao--primario botao--mini" type="button" data-abre-pedido>Ver agenda</button></div>
+
+<div class="gaveta" data-gaveta role="dialog" aria-modal="true" aria-labelledby="titulo-pedido">
+  <div class="gaveta__fundo" data-fecha-pedido></div>
+  <div class="gaveta__painel">
+    <div class="gaveta__topo"><h2 id="titulo-pedido">Seu agendamento</h2><button class="fechar" type="button" data-fecha-pedido aria-label="Fechar">×</button></div>
+    <div class="gaveta__corpo">
+      <div data-itens></div>
+      <div class="gaveta__form" data-form-pedido>
+        <div class="campo"><label for="p-nome">Seu nome</label><input id="p-nome" autocomplete="name" placeholder="Como podemos te chamar?"></div>
+        <div class="campos">
+          <div class="campo"><label for="p-data">Dia</label><input id="p-data" type="date"></div>
+          <div class="campo"><label for="p-periodo">Período</label><select id="p-periodo" data-periodos></select></div>
+        </div>
+      </div>
+    </div>
+    <div class="gaveta__pe">
+      <div class="linha-total"><span>Subtotal</span><span data-g-sub>R$ 0</span></div>
+      <div class="linha-total" data-g-entrega-linha><span data-txt="entregaRotulo"></span><span data-g-entrega>—</span></div>
+      <div class="linha-total grande"><span>Total</span><b data-g-total>R$ 0</b></div>
+      <button class="botao botao--whats botao--bloco" type="button" data-enviar-pedido><svg aria-hidden="true"><use href="#i-whats"/></svg>Enviar no WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<div class="janela" data-janela role="dialog" aria-modal="true" aria-labelledby="titulo-janela">
+  <div class="janela__fundo" data-fecha-janela></div>
+  <div class="janela__caixa">
+    <h2 id="titulo-janela">Assim o pedido chega no WhatsApp</h2>
+    <p>Este é um site de exemplo. No site do seu negócio, este botão abre o WhatsApp com a mensagem abaixo já escrita: o cliente só aperta enviar.</p>
+    <div class="whats-previa"><div class="balao" data-balao></div></div>
+    <div class="janela__botoes"><button class="botao botao--contorno" type="button" data-copiar>Copiar mensagem</button><button class="botao botao--primario" type="button" data-fecha-janela>Entendi</button></div>
+  </div>
+</div>
+<div class="toast" data-toast role="status"><svg aria-hidden="true"><use href="#i-check"/></svg><span data-toast-txt></span></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pata" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="6.5" cy="10" rx="2" ry="2.6"/><ellipse cx="10" cy="6.2" rx="2" ry="2.6"/><ellipse cx="14" cy="6.2" rx="2" ry="2.6"/><ellipse cx="17.5" cy="10" rx="2" ry="2.6"/><path d="M12 11.5c-3 0-6 3.6-6 6.2 0 1.6 1.3 2.4 2.8 2.4 1.3 0 2-.6 3.2-.6s1.9.6 3.2.6c1.5 0 2.8-.8 2.8-2.4 0-2.6-3-6.2-6-6.2z"/></g></symbol>
+  <symbol id="i-olho" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2.5 12.5c2.5-3.6 5.7-5.4 9.5-5.4s7 1.8 9.5 5.4"/><path d="M5 9.6 3.6 7.8M8.4 7.8 7.6 5.7M12 7.1V4.9M15.6 7.8l.8-2.1M19 9.6l1.4-1.8"/><circle cx="12" cy="13" r="3"/></g></symbol>
+  <symbol id="i-sacola" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/></g></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h6l-2-6h-3M14 7h3l3 10M5 11h5"/></g></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></g></symbol>
+  <symbol id="i-pix" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9 9-9z"/><path d="M8 12l2.5-2.5a2 2 0 0 1 3 0L16 12l-2.5 2.5a2 2 0 0 1-3 0L8 12z"/></g></symbol>
+  <symbol id="i-folha" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10 10 5 20 4c0 10-5 15-14 15"/><path d="M5 19c3-4 6-7 10-9"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></g></symbol>
+  <symbol id="i-pessoas" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.8-3.2 3-5 5.5-5s4.7 1.8 5.5 5M16 5.5a3 3 0 0 1 0 5.6M17.5 14c1.6.6 2.7 2.2 3 5"/></g></symbol>
+  <symbol id="i-relogio" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="i-coracao" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4h2c.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></symbol>
+  <symbol id="i-whats" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.46 9.48-9.46 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.06-17.52A11.32 11.32 0 0 0 12.04.64C5.76.64.66 5.74.65 12.01c0 2 .52 3.96 1.52 5.69L.56 23.6l6.04-1.58a11.36 11.36 0 0 0 5.43 1.38h.01c6.27 0 11.38-5.1 11.38-11.37 0-3.04-1.18-5.9-3.33-8.05z"/></symbol>
+</svg>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  const L = window.LOJA;
+  const $ = (s, el=document) => el.querySelector(s);
+  const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const temGSAP = typeof window.gsap !== "undefined";
+  const real = v => v.toLocaleString("pt-BR", { style:"currency", currency:"BRL", minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  const foto = (id, w) => `https://images.unsplash.com/photo-${id}?w=${w}&q=72&fm=jpg&auto=format&fit=crop`;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const norm = s => String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().trim();
+  const pega = caminho => caminho.split(".").reduce((o,k) => o == null ? o : o[k], L);
+  const guarda = { ler(k,p){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : p; } catch(e){ return p; } }, gravar(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+  const minTxt = m => m >= 60 ? `${Math.floor(m/60)}h${m%60 ? String(m%60).padStart(2,"0") : ""}` : `${m} min`;
+
+  /* ---------- textos e fotos vindos da configuração ---------- */
+  $$("[data-txt]").forEach(el => { const v = pega(el.dataset.txt); if (v != null) el.textContent = v; });
+  $$("[data-html]").forEach(el => { const v = pega(el.dataset.html); if (v != null) el.innerHTML = v; });
+  $$("[data-foto-cfg]").forEach(img => { const f = pega(img.dataset.fotoCfg); if (f){ img.src = foto(f.id, img.dataset.w); img.alt = f.alt || ""; } });
+  $$("[data-icone]").forEach(u => u.setAttribute("href", "#" + L.icone));
+  $("[data-marca]").innerHTML = `${esc(L.marcaCurta)}<small>${esc(L.marcaSub)}</small>`;
+  $("[data-status-extra]").textContent = L.statusExtra;
+  const MENU = [["#servicos","Serviços"],["#monte",L.montador.menu],["#plano","Plano mensal"],["#info",L.info.menu],["#duvidas","Dúvidas"]];
+  $("[data-menu]").innerHTML = MENU.map(([h,t]) => `<a href="${h}">${t}</a>`).join("");
+  $("[data-rodape-menu]").innerHTML = MENU.slice(0,4).map(([h,t]) => `<li><a href="${h}">${t}</a></li>`).join("");
+  $("[data-hero-selo]").innerHTML = `<b>${esc(L.hero.selo[0])}</b> ${esc(L.hero.selo[1])}`;
+  $("[data-hero-titulo]").innerHTML = L.hero.titulo.map(l => `<span class="linha"><span>${l}</span></span>`).join("");
+  $("[data-provas]").innerHTML = L.hero.provas.map(([v,t,est]) => `<div class="prova revela"><b>${v}</b><span>${est ? '<span class="estrelas">★★★★★</span> ' : ""}${t}</span></div>`).join("");
+  $("[data-beneficios]").innerHTML = L.beneficios.map(([ic,t,s]) => `<div class="beneficio revela"><span class="beneficio__icone"><svg aria-hidden="true"><use href="#${ic}"/></svg></span><span><b>${t}</b><span>${s}</span></span></div>`).join("");
+  $("[data-passos]").innerHTML = L.passos.map(([t,s]) => `<div class="passo revela"><h3>${t}</h3><p>${s}</p></div>`).join("");
+  $("[data-politicas]").innerHTML = L.politicas.map(([t,s]) => `<div class="politica revela"><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>${t}</b><span>${s}</span></span></div>`).join("");
+  const cores = ["var(--framboesa)","var(--pistache)","var(--ouro)"];
+  $("[data-depoimentos]").innerHTML = L.depoimentos.map(([txt,nome,ctx],i) => `<figure class="depoimento revela" style="margin:0"><span class="estrelas">★★★★★</span><p>“${txt}”</p><footer><span class="avatar" style="background:${cores[i%3]}">${nome[0]}</span><span><b>${nome}</b><span>${ctx}</span></span></footer></figure>`).join("");
+  $("[data-faq]").innerHTML = L.faq.map(([p,r],i) => `<details class="pergunta"${i === 0 ? " open" : ""}><summary>${p}<i aria-hidden="true">+</i></summary><div class="pergunta__resposta">${r}</div></details>`).join("");
+  $("[data-periodos]").innerHTML = L.periodos.map(p => `<option>${p}</option>`).join("");
+
+  /* ---------- horário de Campinas ---------- */
+  const DIAS = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+  function agoraSP(){
+    const p = new Intl.DateTimeFormat("en-US", { timeZone:"America/Sao_Paulo", weekday:"short", hour:"numeric", minute:"numeric", hour12:false }).formatToParts(new Date());
+    const g = t => (p.find(x => x.type === t) || {}).value;
+    return { dia: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(g("weekday")), hora: (Number(g("hour")) % 24) + Number(g("minute"))/60 };
+  }
+  function status(){
+    const { dia, hora } = agoraSP(), h = L.horarios[dia], ponto = $("[data-status-ponto]"), txt = $("[data-status-texto]");
+    if (h && hora >= h[0] && hora < h[1]){ ponto.classList.remove("fechado"); txt.textContent = `Aberto agora · atendimento até as ${h[1]}h`; return; }
+    ponto.classList.add("fechado");
+    for (let k = 0; k < 8; k++){ const d = (dia+k)%7, hh = L.horarios[d]; if (!hh) continue;
+      if (k === 0 && hora < hh[0]){ txt.textContent = `Fechado agora · abre hoje às ${hh[0]}h`; return; }
+      if (k > 0){ txt.textContent = `Fechado agora · abre ${k === 1 ? "amanhã" : DIAS[d].toLowerCase()} às ${hh[0]}h`; return; } }
+  }
+  status(); setInterval(status, 60000);
+  const hoje = agoraSP().dia;
+  $("[data-horarios]").innerHTML = [1,2,3,4,5,6,0].map(d => { const h = L.horarios[d]; return `<li class="${d === hoje ? "hoje" : ""}"><span>${DIAS[d]}</span><span>${h ? `${h[0]}h às ${h[1]}h` : "Fechado"}</span></li>`; }).join("");
+  const diaAberto = iso => !!L.horarios[new Date(iso + "T12:00:00").getDay()];
+
+  /* ---------- temporada ---------- */
+  if (!L.temporada) $("[data-temporada-bloco]").remove();
+  else {
+    const fim = new Date(L.temporada.prazo).getTime();
+    const conta = () => { let r = Math.max(0, fim - Date.now()); const d = Math.floor(r/864e5); r -= d*864e5; const h = Math.floor(r/36e5); r -= h*36e5;
+      $("[data-c=d]").textContent = String(d).padStart(2,"0"); $("[data-c=h]").textContent = String(h).padStart(2,"0"); $("[data-c=m]").textContent = String(Math.floor(r/6e4)).padStart(2,"0"); };
+    conta(); setInterval(conta, 30000);
+  }
+
+  /* ---------- seção informativa: zonas (leva e traz) ou cuidados ---------- */
+  const zonaDe = b => { const n = norm(b); if (!n || !L.zonas) return null; return L.zonas.find(z => z.bairros.some(x => norm(x) === n)) || null; };
+  if (L.zonas){
+    $("#lista-bairros").innerHTML = L.zonas.flatMap(z => z.bairros).sort((a,b)=>a.localeCompare(b,"pt-BR")).map(b => `<option value="${esc(b)}">`).join("");
+    $("[data-zonas]").innerHTML = L.zonas.map((z,i) => `<div class="zona revela" data-zona="${i}"><i class="zona__cor" style="background:${z.cor}"></i><span><b>${z.nome}</b><span>${z.bairros.slice(0,6).join(", ")} e outros</span></span><span class="zona__preco">${real(z.preco)}</span></div>`).join("")
+      + `<div class="zona revela"><i class="zona__cor" style="background:rgba(255,255,255,.4)"></i><span><b>${L.info.semTaxa[0]}</b><span>${L.info.semTaxa[1]}</span></span><span class="zona__preco">Grátis</span></div>`;
+    const busca = $("#busca-bairro"), res = $("[data-busca-res]"); res.textContent = L.info.padrao;
+    busca.addEventListener("input", () => {
+      const z = zonaDe(busca.value);
+      $$("[data-zona]").forEach(el => el.classList.toggle("destaque", !!z && L.zonas.indexOf(z) === Number(el.dataset.zona)));
+      if (!busca.value.trim()){ res.textContent = L.info.padrao; return; }
+      res.innerHTML = z ? `${esc(L.info.rotuloTaxa)} em ${esc(busca.value.trim())}: <b>${real(z.preco)}</b>` : "Não achamos esse bairro na lista. Mande no agendamento que confirmamos a taxa.";
+    });
+  } else {
+    $("[data-busca-bloco]").remove();
+    $("[data-zonas]").className = "cuidados";
+    $("[data-zonas]").innerHTML = L.info.itens.map(([t,s]) => `<div class="cuidado revela"><b>${t}</b><span>${s}</span></div>`).join("");
+  }
+
+  /* ---------- agenda (carrinho) ---------- */
+  const chaveLS = "pao-" + norm(L.marcaCurta).replace(/\W+/g,"-");
+  let pedido = guarda.ler(chaveLS, []);
+  const salvar = () => guarda.gravar(chaveLS, pedido);
+  const subtotal = () => pedido.reduce((s,i) => s + i.preco * i.qtd, 0);
+  const qtdTotal = () => pedido.reduce((s,i) => s + i.qtd, 0);
+  let entregaAgenda = { valor:0, txt:"—" };
+  function adicionar(item){
+    const ex = pedido.find(i => i.chave === item.chave);
+    if (ex) ex.qtd += 1; else pedido.push({ qtd:1, ...item });
+    salvar(); desenharPedido(); desenharServicos(); avisar(`${item.nome} na agenda`);
+    if (temGSAP && !reduz) gsap.fromTo(".carrinho-botao", { scale:1 }, { scale:1.12, duration:.18, yoyo:true, repeat:1 });
+  }
+  function mudarQtd(chave, d){ const it = pedido.find(i => i.chave === chave); if (!it) return; it.qtd += d; if (it.qtd <= 0) pedido = pedido.filter(i => i.chave !== chave); salvar(); desenharPedido(); desenharServicos(); }
+  function desenharPedido(){
+    const n = qtdTotal(), sub = subtotal();
+    const c = $("[data-contador]"); c.textContent = n; c.hidden = n === 0;
+    $("[data-barra]").classList.toggle("tem", n > 0);
+    $("[data-barra-total]").textContent = real(sub + entregaAgenda.valor);
+    $("[data-barra-itens]").textContent = `${n} ${n === 1 ? "serviço" : "serviços"} na agenda`;
+    $("[data-itens]").innerHTML = pedido.length ? pedido.map(i => `
+      <div class="item">${i.foto ? `<img src="${foto(i.foto,160)}" alt="">` : `<span class="item__ico"><svg width="28" height="28"><use href="#${L.icone}"/></svg></span>`}
+        <div><b>${esc(i.nome)}</b><small>${esc(i.detalhe || "")}</small><button class="item__remover" type="button" data-remover="${esc(i.chave)}">Remover</button></div>
+        <div class="item__preco">${real(i.preco*i.qtd)}${i.unico ? "" : `<div><span class="qtd"><button type="button" data-q="${esc(i.chave)}" data-d="-1" aria-label="Menos">−</button><span>${i.qtd}</span><button type="button" data-q="${esc(i.chave)}" data-d="1" aria-label="Mais">+</button></span></div>`}</div>
+      </div>`).join("") : `<div class="vazio"><svg><use href="#i-sacola"/></svg><b>Sua agenda está vazia</b><br>Escolha um serviço ou monte o atendimento.</div>`;
+    $("[data-form-pedido]").hidden = !pedido.length;
+    $("[data-g-sub]").textContent = real(sub);
+    $("[data-g-entrega-linha]").hidden = !L.zonas;
+    $("[data-g-entrega]").textContent = entregaAgenda.txt;
+    $("[data-g-total]").textContent = real(sub + entregaAgenda.valor);
+    $("[data-enviar-pedido]").disabled = !pedido.length;
+  }
+  $("[data-itens]").addEventListener("click", ev => {
+    const q = ev.target.closest("[data-q]"); if (q) return mudarQtd(q.dataset.q, Number(q.dataset.d));
+    const r = ev.target.closest("[data-remover]"); if (r){ pedido = pedido.filter(i => i.chave !== r.dataset.remover); salvar(); desenharPedido(); desenharServicos(); }
+  });
+  const gaveta = $("[data-gaveta]"); let lenis = null;
+  const abrirPedido = () => { gaveta.classList.add("aberta"); lenis && lenis.stop(); setTimeout(() => $(".gaveta .fechar").focus(), 50); };
+  const fecharPedido = () => { gaveta.classList.remove("aberta"); lenis && lenis.start(); };
+  $$("[data-abre-pedido]").forEach(b => b.addEventListener("click", abrirPedido));
+  $$("[data-fecha-pedido]").forEach(b => b.addEventListener("click", fecharPedido));
+  let tToast; function avisar(t){ const el = $("[data-toast]"); $("[data-toast-txt]").textContent = t; el.classList.add("mostra"); clearTimeout(tToast); tToast = setTimeout(() => el.classList.remove("mostra"), 2200); }
+
+  /* ---------- WhatsApp ou demonstração ---------- */
+  const janela = $("[data-janela]"); let ultimaMsg = "";
+  function enviarWhats(msg){
+    ultimaMsg = msg;
+    if (L.whatsapp){ window.open(`https://wa.me/${L.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank", "noopener"); return; }
+    $("[data-balao]").innerHTML = esc(msg).replace(/\*(.+?)\*/g, "<b>$1</b>") + `<small>${new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})} ✓✓</small>`;
+    janela.classList.add("aberta"); lenis && lenis.stop();
+  }
+  $$("[data-fecha-janela]").forEach(b => b.addEventListener("click", () => { janela.classList.remove("aberta"); if (!gaveta.classList.contains("aberta")) lenis && lenis.start(); }));
+  $("[data-copiar]").addEventListener("click", () => { navigator.clipboard && navigator.clipboard.writeText(ultimaMsg).then(() => avisar("Mensagem copiada"), () => {}); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape"){ janela.classList.remove("aberta"); fecharPedido(); } });
+  $$("[data-whats-duvida]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); enviarWhats(`Olá, ${L.nome}! Vi o site e tenho uma dúvida:`); }));
+  const dataBR = v => v ? new Date(v + "T12:00:00").toLocaleDateString("pt-BR", { weekday:"long", day:"2-digit", month:"2-digit" }) : "a combinar";
+  const limpa = linhas => linhas.filter((l,i,a) => !(l === "" && (a[i-1] === "" || i === a.length-1))).join("\n");
+  $("[data-enviar-pedido]").addEventListener("click", () => {
+    const nome = $("#p-nome").value.trim();
+    enviarWhats(limpa([
+      `Olá, ${L.nome}! Quero agendar pelo site.`, "", "*Serviços*",
+      ...pedido.map(i => `• ${i.qtd > 1 ? i.qtd + "× " : ""}${i.nome}${i.detalhe ? ` (${i.detalhe})` : ""}: ${real(i.preco*i.qtd)}`), "",
+      L.zonas && entregaAgenda.valor ? `${L.entregaRotulo}: ${entregaAgenda.txt}` : "",
+      `*Total estimado: ${real(subtotal() + entregaAgenda.valor)}*`,
+      `Dia: ${dataBR($("#p-data").value)} · ${$("#p-periodo").value}`,
+      nome ? `Nome: ${nome}` : ""
+    ]));
+  });
+
+  /* ---------- serviços ---------- */
+  let filtro = "todos";
+  $("[data-filtros]").innerHTML = Object.entries(L.servicos.categorias).map(([k,v]) => `<button class="filtro${k === filtro ? " ativo" : ""}" role="tab" type="button" data-filtro="${k}">${v}</button>`).join("");
+  $("[data-filtros]").addEventListener("click", e => { const b = e.target.closest("[data-filtro]"); if (!b) return; filtro = b.dataset.filtro; $$("[data-filtro]").forEach(x => x.classList.toggle("ativo", x === b)); desenharServicos(true); });
+  function desenharServicos(anima){
+    $("[data-produtos]").innerHTML = L.servicos.itens.filter(p => filtro === "todos" || p.cat === filtro).map(p => {
+      const np = pedido.find(i => i.chave === p.id);
+      const acao = p.monta ? `<button class="botao botao--primario botao--mini" type="button" data-montar="${p.id}">Personalizar</button>`
+        : np ? `<span class="qtd"><button type="button" data-pq="${p.id}" data-d="-1" aria-label="Menos">−</button><span>${np.qtd}</span><button type="button" data-pq="${p.id}" data-d="1" aria-label="Mais">+</button></span>`
+        : `<button class="botao botao--primario botao--mini" type="button" data-add="${p.id}">Agendar</button>`;
+      return `<article class="produto"><div class="produto__foto"><img src="${foto(p.foto,640)}" alt="${esc(p.nome)}" loading="lazy">${p.etiqueta ? `<span class="etiqueta">${p.etiqueta}</span>` : ""}</div>
+        <div class="produto__corpo"><h3>${esc(p.nome)}</h3><p>${esc(p.desc)}</p>
+        <div class="produto__info"><span><svg><use href="#i-relogio"/></svg>${p.info1}</span><span><svg><use href="#i-check"/></svg>${p.info2}</span></div>
+        <div class="produto__pe"><span class="preco"><small>${p.unid}</small><b>${real(p.preco)}</b></span>${acao}</div></div></article>`;
+    }).join("");
+    if (anima && temGSAP && !reduz) gsap.from(".produto", { y:24, opacity:0, duration:.5, stagger:.05, ease:"power3.out" });
+  }
+  $("[data-produtos]").addEventListener("click", e => {
+    const a = e.target.closest("[data-add]"); if (a){ const p = L.servicos.itens.find(x => x.id === a.dataset.add); return adicionar({ chave:p.id, nome:p.nome, preco:p.preco, foto:p.foto, detalhe:p.unid }); }
+    const q = e.target.closest("[data-pq]"); if (q) return mudarQtd(q.dataset.pq, Number(q.dataset.d));
+    const m = e.target.closest("[data-montar]"); if (m){ aplicarModelo(L.servicos.itens.find(x => x.id === m.dataset.montar)); irPara("#monte"); }
+  });
+  function irPara(alvo){ if (lenis) lenis.scrollTo(alvo, { offset:-80 }); else document.querySelector(alvo).scrollIntoView({ behavior: reduz ? "auto" : "smooth" }); }
+
+  /* ---------- montador ---------- */
+  const M = L.montador, form = $("[data-montador]");
+  const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const amanha = new Date(); amanha.setDate(amanha.getDate() + 1);
+  const extraTxt = o => [o.soma && M.mostrarSoma ? real(o.soma) : "", o.fixo ? "+" + real(o.fixo) : "", o.mult && o.mult !== 1 ? (o.mult > 1 ? "+" : "") + Math.round((o.mult-1)*100) + "%" : ""].filter(Boolean).join(" ");
+  form.innerHTML = M.grupos.map((g,gi) => `
+    <div class="etapa revela"><div class="etapa__topo"><span class="etapa__num">${gi+1}</span><h3>${g.titulo}</h3>${g.dica ? `<span class="etapa__dica">${g.dica}</span>` : ""}</div>
+      <div class="opcoes">${g.opcoes.map((o,oi) => `<label class="opcao"><input type="${g.tipo}" name="${g.id}" value="${oi}"${g.tipo === "radio" && oi === (g.padrao||0) ? " checked" : ""}><span>${esc(o.nome)}${extraTxt(o) ? ` <small>${extraTxt(o)}</small>` : ""}</span></label>`).join("")}</div>
+    </div>`).join("") + `
+    <div class="etapa revela"><div class="etapa__topo"><span class="etapa__num">${M.grupos.length+1}</span><h3>Dia e horário</h3></div>
+      <div class="campos">
+        <div class="campo"><label for="m-data">Dia</label><input type="date" id="m-data" name="data" min="${iso(amanha)}"></div>
+        <div class="campo"><label for="m-periodo">Período</label><select id="m-periodo" name="periodo">${L.periodos.map(p => `<option>${p}</option>`).join("")}</select></div>
+        ${L.zonas ? `<div class="campo"><label for="m-modo">${L.leva.rotulo}</label><select id="m-modo" name="modo"><option value="leva">${L.leva.sim}</option><option value="nao">${L.leva.nao}</option></select></div>
+        <div class="campo" data-campo-bairro><label for="m-bairro">Bairro</label><input id="m-bairro" name="bairro" list="lista-bairros" placeholder="Ex.: Cambuí" autocomplete="off"></div>` : ""}
+        <div class="campo campo--inteiro"><label for="m-obs">${M.obsRotulo}</label><input id="m-obs" name="obs" placeholder="${esc(M.obsDica)}"></div>
+      </div>
+      <div data-alerta-data></div>
+    </div>`;
+  $$("input[type=date]").forEach(i => i.min = iso(amanha));
+  const lerMontador = () => {
+    const fd = new FormData(form);
+    const esc_ = M.grupos.map(g => ({ g, ops: fd.getAll(g.id).map(i => g.opcoes[Number(i)]) }));
+    const todas = esc_.flatMap(x => x.ops);
+    const soma = todas.reduce((s,o) => s + (o.soma||0), 0), mult = todas.reduce((s,o) => s * (o.mult||1), 1), fixo = todas.reduce((s,o) => s + (o.fixo||0), 0);
+    const minutos = todas.reduce((s,o) => s + (o.min||0), 0);
+    const manut = todas.map(o => o.manut).find(Boolean);
+    const leva = L.zonas && fd.get("modo") === "leva", bairro = (fd.get("bairro")||"").trim(), zona = leva ? zonaDe(bairro) : null;
+    const servico = Math.round(soma * mult + fixo);
+    const taxa = zona ? zona.preco : 0;
+    const principal = esc_[M.principal].ops[0];
+    return { esc_, servico, taxa, total: servico + taxa, minutos, manut, leva, bairro, zona, principal, data: fd.get("data"), periodo: fd.get("periodo"), obs: (fd.get("obs")||"").trim(), vazio: M.grupos.some(g => g.obrigatorio && !fd.getAll(g.id).length) };
+  };
+  let ultimoTotal = 0;
+  function desenharResumo(){
+    const r = lerMontador();
+    $("[data-r-titulo]").textContent = r.principal ? r.principal.nome : M.resumo;
+    const linhas = r.esc_.filter((x,i) => i !== M.principal).map(x => [x.g.curto || x.g.titulo, x.ops.length ? x.ops.map(o => o.nome).join(" + ") : "—"]);
+    if (r.minutos) linhas.push(["Duração", `cerca de ${minTxt(r.minutos)}`]);
+    if (r.manut && r.data){ const d = new Date(r.data + "T12:00:00"); d.setDate(d.getDate() + r.manut); linhas.push(["Próxima manutenção", d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})]); }
+    if (L.zonas) linhas.push([L.entregaRotulo, !r.leva ? "Não precisa" : r.zona ? `${esc(r.bairro)} · ${real(r.taxa)}` : r.bairro ? "A confirmar" : "Informe o bairro"]);
+    $("[data-r-lista]").innerHTML = linhas.map(([a,b]) => `<li><span>${a}</span><span>${b}</span></li>`).join("");
+    const el = $("[data-r-total]");
+    if (temGSAP && !reduz && ultimoTotal){ const o = { v: ultimoTotal }; gsap.to(o, { v: r.total, duration:.45, onUpdate:() => el.textContent = real(Math.round(o.v)) }); } else el.textContent = real(r.total);
+    ultimoTotal = r.total;
+    $("[data-r-nota]").textContent = r.data ? `Para ${dataBR(r.data)}, ${r.periodo.toLowerCase()}. ${M.nota}` : `Escolha o dia para reservar. ${M.nota}`;
+    const cb = $("[data-campo-bairro]"); if (cb) cb.hidden = !r.leva;
+    M.grupos.forEach(g => { if (g.tipo === "checkbox" && g.max){ const n = $$(`input[name="${g.id}"]:checked`, form).length; $$(`input[name="${g.id}"]`, form).forEach(i => i.disabled = !i.checked && n >= g.max); } });
+    const al = $("[data-alerta-data]");
+    al.innerHTML = !r.data ? "" : !diaAberto(r.data) ? `<div class="alerta alerta--aviso">Não atendemos às ${DIAS[new Date(r.data + "T12:00:00").getDay()].toLowerCase()}s. Escolha outro dia.</div>` : `<div class="alerta alerta--ok">Dia com atendimento. Confirmamos o horário no WhatsApp.</div>`;
+    $("[data-enviar-monta]").disabled = r.vazio; $("[data-add-monta]").disabled = r.vazio;
+  }
+  form.addEventListener("input", desenharResumo); form.addEventListener("change", desenharResumo);
+  function aplicarModelo(p){
+    Object.entries(p.monta).forEach(([gid, vals]) => { const g = M.grupos.find(x => x.id === gid); $$(`input[name="${gid}"]`, form).forEach(i => { i.checked = [].concat(vals).includes(g.opcoes[Number(i.value)].nome); i.disabled = false; }); });
+    desenharResumo(); avisar(`${p.nome}: ajuste os detalhes e o dia`);
+  }
+  const textoMonta = (r, semPrincipal) => r.esc_.map((x,i) => x.ops.length && !(semPrincipal && i === M.principal) ? `${x.g.curto || x.g.titulo}: ${x.ops.map(o => o.nome).join(" + ")}` : "").filter(Boolean);
+  $("[data-enviar-monta]").addEventListener("click", () => {
+    const r = lerMontador();
+    enviarWhats(limpa([
+      `Olá, ${L.nome}! Montei o atendimento no site e quero agendar.`, "",
+      ...textoMonta(r).map(t => "• " + t),
+      r.minutos ? `Duração: cerca de ${minTxt(r.minutos)}` : "",
+      `Dia: ${dataBR(r.data)} · ${r.periodo}`,
+      L.zonas ? (r.leva ? `${L.entregaRotulo} em ${r.bairro || "(bairro a informar)"}${r.zona ? `: ${real(r.taxa)}` : ""}` : L.leva.nao) : "",
+      r.obs ? `${M.obsRotulo}: ${r.obs}` : "", "",
+      `*Total estimado: ${real(r.total)}*`
+    ]));
+  });
+  $("[data-add-monta]").addEventListener("click", () => {
+    const r = lerMontador();
+    adicionar({ chave:"monta-" + Date.now(), nome: r.principal ? r.principal.nome : "Atendimento", detalhe: textoMonta(r, true).join(" · "), preco: r.servico, unico:true });
+    if (r.data) $("#p-data").value = r.data; $("#p-periodo").value = r.periodo;
+    if (L.zonas) entregaAgenda = r.leva ? (r.zona ? { valor:r.taxa, txt:real(r.taxa) } : { valor:0, txt:"A confirmar" }) : { valor:0, txt:L.leva.nao };
+    desenharPedido(); irPara("#plano");
+  });
+
+  /* ---------- plano mensal ---------- */
+  const P = L.plano; let vezes = P.padrao;
+  $("[data-plano-servico]").innerHTML = P.opcoes.map(([n,p],i) => `<option value="${i}">${esc(n)} · ${real(p)}</option>`).join("");
+  const lerPlano = () => { const [nome, preco] = P.opcoes[Number($("[data-plano-servico]").value)]; const avulso = preco * vezes, total = Math.round(avulso * (1 - P.desconto)); return { nome, preco, avulso, total, eco: avulso - total }; };
+  function desenharPlano(){ const p = lerPlano(); $("[data-plano-vezes]").textContent = vezes; $("[data-plano-avulso]").textContent = real(p.avulso); $("[data-plano-total]").textContent = real(p.total); $("[data-plano-eco]").textContent = real(p.eco); }
+  $("[data-plano-servico]").addEventListener("change", desenharPlano);
+  $$("[data-plano-d]").forEach(b => b.addEventListener("click", () => { vezes = Math.max(1, Math.min(P.max, vezes + Number(b.dataset.planoD))); desenharPlano(); }));
+  $("[data-plano-add]").addEventListener("click", () => { const p = lerPlano(); adicionar({ chave:"plano", nome:`Plano mensal: ${p.nome}`, detalhe:`${vezes}× por mês · ${Math.round(P.desconto*100)}% de desconto`, preco:p.total, unico:true }); abrirPedido(); });
+
+  /* selo some no rodapé; topo */
+  if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => $(".selo-exemplo").classList.toggle("some", e.isIntersecting)).observe($(".rodape"));
+  const topo = $(".topo"); const marcaTopo = () => topo.classList.toggle("rolou", scrollY > 30);
+  addEventListener("scroll", marcaTopo, { passive:true }); marcaTopo();
+
+  desenharServicos(); desenharResumo(); desenharPlano(); desenharPedido();
+  if (!temGSAP || reduz) return;
+
+  /* ---------- animações discretas ---------- */
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.Lenis){
+    lenis = new Lenis({ lerp:.11, smoothWheel:true }); lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+    $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => { const alvo = a.getAttribute("href"); if (alvo.length < 2) return; e.preventDefault(); lenis.scrollTo(alvo, { offset:-80 }); }));
+  }
+  gsap.timeline({ defaults:{ ease:"expo.out" } })
+    .from(".hero h1 .linha > span", { yPercent:110, duration:1.1, stagger:.08 })
+    .from(".hero .revela", { y:20, opacity:0, duration:.9, stagger:.07 }, "-=.8")
+    .from(".foto--a", { clipPath:"inset(100% 0 0 0 round 20px)", duration:1.3 }, .1)
+    .from(".foto--b", { scale:.6, opacity:0, duration:1 }, .5)
+    .from(".cartao-flutua", { x:-30, opacity:0, duration:.9 }, .8)
+    .from(".selo-giro", { scale:0, rotate:-90, duration:1, ease:"back.out(1.6)" }, .7);
+  gsap.to(".selo-giro__txt", { rotate:360, transformOrigin:"100px 100px", duration:20, ease:"none", repeat:-1 });
+  gsap.to(".foto--a img", { yPercent:8, scale:1.08, ease:"none", scrollTrigger:{ trigger:".hero", start:"top top", end:"bottom top", scrub:true } });
+  gsap.to(".cartao-flutua", { y:-10, duration:2.4, ease:"sine.inOut", repeat:-1, yoyo:true });
+  $$(".revela").forEach(el => { if (el.closest(".hero")) return; gsap.from(el, { y:36, opacity:0, duration:.9, ease:"power3.out", scrollTrigger:{ trigger:el, start:"top 90%", once:true } }); });
+  if (innerWidth > 640) ScrollTrigger.batch(".produto", { start:"top 92%", once:true, onEnter: b => gsap.from(b, { y:40, opacity:0, duration:.8, stagger:.07, ease:"power3.out" }) });
+  $$(".titulo-secao").forEach(t => gsap.from(t, { y:30, opacity:0, duration:1, ease:"expo.out", scrollTrigger:{ trigger:t, start:"top 88%", once:true } }));
+  addEventListener("load", () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
